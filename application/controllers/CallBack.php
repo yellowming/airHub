@@ -26,7 +26,7 @@ class CallBack extends CI_Controller {
 		$content = json_decode($json, true);
 		
 		//github发送过来的签名
-		$signature = $this->input->server('HTTP_X_HUB_SIGNATURE')
+		$signature = $this->input->server('HTTP_X_HUB_SIGNATURE');
 		if (!$signature) {
 		   show_404();
 		}
