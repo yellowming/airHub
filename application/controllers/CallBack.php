@@ -21,7 +21,6 @@ class CallBack extends CI_Controller {
 	public function GitHubHook()
 	{
 		$hookSecret = '17328378001';
-		log_message('debug', $this->input->raw_input_stream);
 		$json = $this->input->raw_input_stream;
 		$content = json_decode($json, true);
 		
@@ -33,7 +32,7 @@ class CallBack extends CI_Controller {
 
 		list($algo, $hash) = explode('=', $signature, 2);
 		//计算签名  
-		$payloadHash = hash_hmac($algo, $json, $secret);
+		$payloadHash = hash_hmac($algo, $json, $hookSecret);
 
 		// 判断签名是否匹配  
 		if ($hash === $payloadHash) {
@@ -50,6 +49,6 @@ class CallBack extends CI_Controller {
 				$res_log .= '密钥不正确不能pull'.PHP_EOL;
 				$res_log .= '======================================================================='.PHP_EOL;
 		  }
-		  log_message('debug', $this->input->raw_input_stream);
+		  log_message('debug', $res_log);
 	}
 }
