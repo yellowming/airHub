@@ -1,5 +1,15 @@
 <?php
 /**
+ * ngrok.cc 内网穿透服务 PHP 版
+ *
+ * 本程序仅适用于ngrok.cc 使用前请先在 https://ngrok.cc 注册账号.
+ * 机器只要装有php(无须web服务)即可运行本程序,可用于路由器等OpenWRT操作系统
+ * 命令行模式执行 php sunny.php --authtoken=xxxxxx 即可运行
+ *
+ * 感谢 dosgo 提供的 ngrok-php 原版程序
+ *
+ */
+/**
  * CodeIgniter
  *
  * An open source application development framework for PHP
