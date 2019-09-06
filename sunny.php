@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * ngrok.cc 内网穿透服务 PHP 版
  *
