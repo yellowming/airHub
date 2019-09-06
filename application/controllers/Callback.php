@@ -1,7 +1,10 @@
 
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class CallBack extends CI_Controller {
+class Callback extends CI_Controller {
+	public function index(){
+		phpinfo();
+	}
 	public function GitHubHook()
 	{
 		$target = $this->input->server('DOCUMENT_ROOT');
