@@ -20,7 +20,7 @@ class Callback extends CI_Controller {
 		}
 		list($algo, $hash) = explode('=', $signature, 2);
 		//计算签名  
-		$payloadHash = hash_hmac($algo, $json, $secret);
+		$payloadHash = hash_hmac($algo, $json, $hookSecret);
 		// 判断签名是否匹配  
 		if ($hash === $payloadHash) {
 			$cmd = "cd $target && git pull > /var/www/githook.log &";
@@ -35,5 +35,6 @@ class Callback extends CI_Controller {
 				$res_log .= '======================================================================='.PHP_EOL;
 		  }
 		  log_message('debug', $res_log);
+		echo "success!";
 	}
 }
