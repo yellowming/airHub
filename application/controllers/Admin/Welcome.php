@@ -20,6 +20,10 @@ class Welcome extends Admin_Controller {
 	 */
 	public function index()
 	{
-		$this->data = [];
+		$this->pageData = [
+			'a' => 11111111,
+			'b' => 22222222,
+			'c' => 33333333
+		];
 	}
 }

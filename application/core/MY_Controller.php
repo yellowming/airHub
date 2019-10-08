@@ -19,18 +19,32 @@ class Admin_Controller extends MY_Controller
         
     }
 
+    public $viewData = [];
     public function _remap($method, $params = array())
     {
-        echo '<pre>';
-        var_dump($this->router->directory);
-        var_dump($this->router->class);
-        var_dump($this->router->method);
-        echo '</pre>';
-        //$method = 'process_'.$method;
+        
+        $is_ajax = $this->input->is_ajax_request();
+        if($is_ajax) $method = $method.'_'.$this->input->method();
         if (method_exists($this, $method))
         {
-            return call_user_func_array(array($this, $method), $params);
+            call_user_func_array(array($this, $method), $params);
+            if($is_ajax){
+                $this->output
+                    ->set_content_type('application/json')
+                    ->set_output(json_encode($this->viewData));
+            }else{
+                $this->load->view($this->router->directory.$this->router->class.'_'.$this->router->method,$this->viewData);
+            }
+        }else{
+            show_404();
         }
-        show_404();
     }
+
+    public function _output($output)
+    {
+        
+        echo $output;
+    }
+
+    
 }
