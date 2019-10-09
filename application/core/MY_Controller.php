@@ -22,11 +22,9 @@ class Admin_Controller extends MY_Controller
     public $viewData = [];
     public function _remap($method, $params = array())
     {
-        
         $is_ajax = $this->input->is_ajax_request();
         if($is_ajax) $method = $method.'_'.$this->input->method();
-        if (method_exists($this, $method))
-        {
+        if (method_exists($this, $method)){
             call_user_func_array(array($this, $method), $params);
             if($is_ajax){
                 $this->output
