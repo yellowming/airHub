@@ -31,16 +31,21 @@ class Admin_Controller extends MY_Controller
                     ->set_content_type('application/json')
                     ->set_output(json_encode($this->viewData));
             }else{
-                $this->load->view($this->router->directory.$this->router->class.'_'.$this->router->method,$this->viewData);
+                $dirArr = explode("/", rtrim($this->router->directory, "/"));
+                $this->viewData['view_path'] = $this->router->directory.$this->router->class.'_'.$this->router->method;
+                $this->load->view($dirArr[0].'/index', $this->viewData);
             }
         }else{
-            show_404();
+            if($this->input->server('HTTP_X_PJAX')){
+                $this->load->view($this->router->directory.$this->router->class.'_'.$this->router->method,$this->viewData);
+            }else{
+                show_404();
+            }
         }
     }
 
     public function _output($output)
     {
-        
         echo $output;
     }
 

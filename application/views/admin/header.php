@@ -1,15 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<!doctype html>
-<html lang="zh-cn" class="h-100">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>Dashboard Template · Bootstrap</title>
-    <link href="/static/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-    
-    </style>
-</head>
-<body class="d-flex flex-column h-100">
+    <div class="d-flex flex-row bg-primary shadow top-nav">
+        <a class="top-nav-brand text-center bg-dark"  style="width:15rem;font-size:1.5rem">BRAND</a>
+        <a class="iconfont icon-menu1 px-3" href="javascript:void(0);" style="font-size:2rem;text-decoration:none"></a>
+        <div class="flex-grow-1 p-2"></div>
+    </div>
     
