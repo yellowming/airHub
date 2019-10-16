@@ -1,9 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Blog_model extends CI_Model {
-
+class AdminMenuModel extends CI_Model {
+    public $allMenu;
     function __construct()
     {
-		parent::__construct();
+        parent::__construct();
+        $this->allMenu = $this->get_all();
         
 	}
     
@@ -11,14 +12,15 @@ class Blog_model extends CI_Model {
     public function get_tree($pid = null)
     {
         $menuTree = $this->get_children_by_id($pid);
-        foreach($menuAll as &$menu){
-
+        foreach($menuTree as $k=>$menu){
+            $children = $this->get_tree($menu['id']);
+            if(count($children) > 0) $menuTree[$k]['children'] = $children;
         }
+        return $menuTree;
     }
     public function get_children_by_id($id){
         $result = [];
-        $menuAll = $this->get_all();
-        foreach($menuAll as $menu){
+        foreach($this->allMenu as $menu){
             if($menu['parent_id'] === $id) $result[] = $menu;
         }
         return $result;
@@ -28,45 +30,52 @@ class Blog_model extends CI_Model {
         return [
             [
                 'id' => 0,
-                'title' => '首页',
-                'icon' => 'dashboard',
+                'name' => '首页',
+                'icon' => 'fas fa-tachometer-alt',
                 'uri' => 'admin',
                 'parent_id' => null
             ],
             [
                 'id' => 1,
-                'title' => '系统与设置',
+                'name' => '系统与设置',
                 'icon' => null,
                 'uri' => null,
                 'parent_id' => null
             ],
             [
                 'id' => 2,
-                'title' => '网站设置',
+                'name' => '网站设置',
                 'icon' => null,
                 'uri' => 'admin',
                 'parent_id' => 1
             ],
             [
                 'id' => 3,
-                'title' => '用户管理',
+                'name' => '用户管理',
                 'icon' => null,
                 'uri' => 'admin',
                 'parent_id' => 1
             ],
             [
                 'id' => 4,
-                'title' => '角色与权限',
+                'name' => '角色与权限',
                 'icon' => null,
                 'uri' => 'admin',
                 'parent_id' => 1
             ],
             [
-                'id' => 3,
-                'title' => '菜单管理',
+                'id' => 5,
+                'name' => '菜单管理',
                 'icon' => null,
-                'uri' => 'admin',
+                'uri' => 'admin/menu',
                 'parent_id' => 1
+            ],
+            [
+                'id' => 6,
+                'name' => '图标',
+                'icon' => null,
+                'uri' => 'admin/icon',
+                'parent_id' => null
             ],
         ];
     }

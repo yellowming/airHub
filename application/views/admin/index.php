@@ -8,13 +8,13 @@
     <title>Dashboard Template · Bootstrap</title>
     <link href="/static/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/admin/css/common.css" rel="stylesheet">
-    <link href="//at.alicdn.com/t/font_890924_fj1rnfuxyon.css" rel="stylesheet">
+    <link href="/static/plugins/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet">
     <?=$template['prepend']?>
 </head>
 <body class="d-flex flex-column h-100">
     <?=$this->load->view('admin/header',[],true)?>
     <div class="d-flex flex-row h-100">
-        <?=$this->load->view('admin/menu',[],true)?>
+        <?=$this->load->view('admin/menu',['menuTree'=>$menutree],true)?>
         <div class="flex-grow-1 p-2 bg-gradient-primary" id="main">
             <?=$this->load->view($template['path'],$data,true)?>
         </div>

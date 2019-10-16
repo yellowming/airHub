@@ -17,8 +17,10 @@ class Admin_Controller extends MY_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('adminMenuModel');
         $this->viewData = [
             'metal' => [],
+            'menutree' => $this->adminMenuModel->get_tree(),
             'title' => '',
             'data' => [],
             'template' => [
@@ -38,7 +40,7 @@ class Admin_Controller extends MY_Controller
             call_user_func_array(array($this, $method), $params);
             if($is_pjax){
                 echo $this->viewData['template']['prepend'];
-                echo $this->load->view($this->viewData['template']['path'],$this->viewData['data']);
+                echo $this->load->view($this->viewData['template']['path'],$this->viewData['data'],true);
                 echo $this->viewData['template']['prepend'];
                 return;
             }
