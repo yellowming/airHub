@@ -38,7 +38,7 @@ class AdminMenuModel extends CI_Model {
             [
                 'id' => 1,
                 'name' => '系统与设置',
-                'icon' => null,
+                'icon' => 'fas fa-wrench',
                 'uri' => null,
                 'parent_id' => null
             ],
@@ -73,7 +73,7 @@ class AdminMenuModel extends CI_Model {
             [
                 'id' => 6,
                 'name' => '图标',
-                'icon' => null,
+                'icon' => 'fas fa-icons',
                 'uri' => 'admin/icon',
                 'parent_id' => null
             ],

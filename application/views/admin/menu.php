@@ -1,5 +1,5 @@
-<div class="sidebar align-items-start bg-dark text-light" style="width:15rem">
-    <ul id="menu">
+<div class="sidebar bg-dark text-light">
+    <ul id="menu" style="width:15rem">
     <?= renderMenuTree($menuTree)?>
     
     </ul>

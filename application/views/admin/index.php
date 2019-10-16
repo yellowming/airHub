@@ -12,10 +12,12 @@
     <?=$template['prepend']?>
 </head>
 <body class="d-flex flex-column h-100">
+    <div class="" style="width:0;height:2px;position:fixed;background:red" id="pjaxProgress"></div>
+    
     <?=$this->load->view('admin/header',[],true)?>
-    <div class="d-flex flex-row h-100">
+    <div class="d-flex flex-row h-100" style="overflow:hidden">
         <?=$this->load->view('admin/menu',['menuTree'=>$menutree],true)?>
-        <div class="flex-grow-1 p-2 bg-gradient-primary" id="main">
+        <div class="container-fluid" id="main">
             <?=$this->load->view($template['path'],$data,true)?>
         </div>
     </div>

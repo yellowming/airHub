@@ -41,7 +41,7 @@ class Admin_Controller extends MY_Controller
             if($is_pjax){
                 echo $this->viewData['template']['prepend'];
                 echo $this->load->view($this->viewData['template']['path'],$this->viewData['data'],true);
-                echo $this->viewData['template']['prepend'];
+                echo $this->viewData['template']['append'];
                 return;
             }
             if($is_ajax) return $this->output->set_content_type('application/json')->set_output(json_encode($this->viewData['data']));

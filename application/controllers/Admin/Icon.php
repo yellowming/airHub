@@ -9,6 +9,16 @@ class Icon extends Admin_Controller {
     }
 	public function index()
 	{
-        $menu = $this->adminMenuModel->allMenu;
+        
+
+        $this->load->helper('yml');
+        $data = spyc_load_file('./static/plugins/fontawesome-free-5.11.2-web/metadata/icons.yml');
+        $this->viewData['data']['icons'] = $data;
+        $this->viewData['template']['append'] = 
+<<<EOF
+            <script>
+            
+            </script>
+EOF;
 	}
 }
