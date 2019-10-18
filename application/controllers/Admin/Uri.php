@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Menu extends Admin_Controller {
+class Uri extends Admin_Controller {
     function __construct()
     {
         parent::__construct();
@@ -9,6 +9,7 @@ class Menu extends Admin_Controller {
     }
 	public function index()
 	{
-        $menu = $this->adminMenuModel->allMenu;
+        $uris = $this->adminUriModel->getAll();
+        $this->viewData['data']['uris'] = $uris;
 	}
 }

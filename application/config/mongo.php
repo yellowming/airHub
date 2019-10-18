@@ -19,6 +19,12 @@ $config['mongo'] = [
         'user' => 'test',
         'pass' => 'test1231'
     ],
+    'local' => [
+        'host' => '127.0.0.1:27017',
+        'db'   => 'FinTV',
+        'user' => '',
+        'pass' => ''
+    ]
 ];
 
  

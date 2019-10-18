@@ -12,18 +12,17 @@
     <?=$template['prepend']?>
 </head>
 <body class="d-flex flex-column h-100">
-    <div class="" style="width:0;height:2px;position:fixed;background:red" id="pjaxProgress"></div>
-    
     <?=$this->load->view('admin/header',[],true)?>
     <div class="d-flex flex-row h-100" style="overflow:hidden">
-        <?=$this->load->view('admin/menu',['menuTree'=>$menutree],true)?>
-        <div class="container-fluid" id="main">
+        <?=$this->load->view('admin/menu',['menuTree'=>$siderMenu],true)?>
+        <main class="w-100" id="main">
             <?=$this->load->view($template['path'],$data,true)?>
-        </div>
+        </main>
     </div>
     <script src="/static/plugins/jquery-3.4.1.min.js"></script>
     <script src="/static/plugins/jquery.pjax.js"></script>
     <script src="/static/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="/static/admin/js/nprogress.min.js"></script>
     <script src="/static/admin/js/common.js"></script>
     <?=$template['append']?>
 </body>

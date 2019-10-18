@@ -1,0 +1,62 @@
+/* 1 */
+{
+    "_id" : ObjectId("5da95699404d012b2e78e108"),
+    "name" : "首页",
+    "icon" : "fas fa-tachometer-alt",
+    "uri" : "admin",
+    "parent_id" : null
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5da956e0404d012b2e78e11f"),
+    "name" : "系统与设置",
+    "icon" : "fas fa-wrench",
+    "uri" : null,
+    "parent_id" : null
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("5da9573f404d012b2e78e12e"),
+    "name" : "网站设置",
+    "icon" : null,
+    "uri" : "admin",
+    "parent_id" : ObjectId("5da956e0404d012b2e78e11f")
+}
+
+/* 4 */
+{
+    "_id" : ObjectId("5da957ba404d012b2e78e148"),
+    "name" : "用户管理",
+    "icon" : null,
+    "uri" : "admin/user",
+    "parent_id" : ObjectId("5da956e0404d012b2e78e11f")
+}
+
+/* 5 */
+{
+    "_id" : ObjectId("5da9581f404d012b2e78e15c"),
+    "name" : "角色与权限",
+    "icon" : null,
+    "uri" : "admin",
+    "parent_id" : ObjectId("5da956e0404d012b2e78e11f")
+}
+
+/* 6 */
+{
+    "_id" : ObjectId("5da95859404d012b2e78e166"),
+    "name" : "路由管理",
+    "icon" : null,
+    "uri" : "admin/uri",
+    "parent_id" : ObjectId("5da956e0404d012b2e78e11f")
+}
+
+/* 7 */
+{
+    "_id" : ObjectId("5da95887404d012b2e78e172"),
+    "name" : "图标",
+    "icon" : "fas fa-icons",
+    "uri" : "admin/icon",
+    "parent_id" : null
+}

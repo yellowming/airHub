@@ -531,7 +531,7 @@ class Spyc {
         }
         $i--;
       }
-
+      
       // Strip out comments
       if (strpos ($line, '#')) {
           $line = preg_replace('/\s*#([^"\']+)$/','',$line);
