@@ -1,12 +1,10 @@
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=base_url('admin')?>">首页</a></li>
-        <li class="breadcrumb-item">系统与设置</li>
-        <li class="breadcrumb-item active" aria-current="page">用户管理</li>
-    </ol>
-</nav>
+
 <div class="container-fluid pb-3">
+    <div class="clearfix pb-2">
+        <a class="btn btn-primary float-right" href="<?=base_url('admin/user/add')?>" role="button">新增用户</a>
+    </div>
+
     <table class="table">
         <thead class="thead-dark">
             <tr>

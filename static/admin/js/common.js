@@ -2,21 +2,18 @@
 
 (function () {
     'use strict'
-
     NProgress.configure({ showSpinner: false });
     if ($.support.pjax) {
       $.pjax.defaults.timeout = 6000
-      $(document).pjax('a', '#main')
-      $(document).on('pjax:send', function() {
+      $(document).pjax('a', '#main').on('submit', 'form', function(event) {
+        $.pjax.submit(event, '#main')
+      }).on('pjax:send', function() {
         NProgress.start()
         NProgress.set(0.4)
-        
-      })
-      $(document).on('pjax:complete', function() {
+      }).on('pjax:complete', function() {
         NProgress.set(0.8)
         NProgress.inc()
-      })
-      $(document).on('pjax:complete', function() {
+      }).on('pjax:complete', function() {
         NProgress.done()
       })
     }
@@ -26,7 +23,6 @@
         $menuItems.parent().removeClass('active')
         $(this).parents('li').addClass('active')
       }
-      
     })
     
     

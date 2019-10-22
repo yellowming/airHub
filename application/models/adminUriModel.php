@@ -1,16 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminUriModel extends CI_Model {
-    private $DB;
+    private $collection;
     function __construct()
     {
         parent::__construct();
-        $this->DB = mongo_connection('local')->FinTV;
-        
+        $this->collection = $this->DB()->FinTV->Admin_uri;
 	}
     
     public function getChildrenById($id = null){
-        $collection = $this->DB->Admin_uri;
-        $cursor = $collection->find(['parent_id'=>$id]);
+        $cursor = $this->collection->find(['parent_id'=>$id]);
         $result = [];
         foreach($cursor as $uri){
             $result[] = $uri;
@@ -19,8 +17,7 @@ class AdminUriModel extends CI_Model {
     }
     public function getAll()
     {
-        $collection = $this->DB->Admin_uri;
-        $cursor = $collection->find();
+        $cursor = $this->collection->find();
         $uris = [];
 		foreach($cursor as $uri){
             $uris[] = $uri;

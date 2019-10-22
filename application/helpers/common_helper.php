@@ -7,9 +7,7 @@ function dump($obj, $isEnd = false){
 }
 
 function mongo_connection($conection = 'default'){
-    if (!class_exists('Mongo')){
-        show_error("The MongoDB PECL extension has not been installed or enabled", 500);
-    }
+    
     $CI =& get_instance();
     $CI->config->load("mongo");
     $clientArray = $CI->config->item('mongo');

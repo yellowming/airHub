@@ -34,7 +34,8 @@ class Admin_Controller extends MY_Controller
                 'path' => '',
                 'prepend' => '',
                 'append' => ''
-            ]
+            ],
+            'alert' => []
         ];
     }
 
@@ -85,7 +86,7 @@ class Admin_Controller extends MY_Controller
     }
 
     
-    function renderSiderMenuTree($prefix = 'menu', $pid = null){
+    private function renderSiderMenuTree($prefix = 'menu', $pid = null){
         $uris = $this->adminUriModel->getChildrenById($pid);
         $html = '';
         $hasActive = false;
@@ -115,6 +116,19 @@ class Admin_Controller extends MY_Controller
                 'hasActive' => $hasActive
             ];
         }
+    }
+
+    public function alert($content = '', $type = 'primary'){
+        $this->viewData['alert'][] = [
+            'content' => $content,
+            'type' => $tpye
+        ];
+    }
+    public function viewPrepend($html){
+        $this->viewData['template']['prepend'] .= $html;
+    }
+    public function viewAppend($html){
+        $this->viewData['template']['append'] .= $html;
     }
 
     

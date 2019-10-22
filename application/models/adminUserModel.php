@@ -1,15 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminUserModel extends CI_Model {
-    private $DB;
+    private $collection;
 	public function __construct()
     {
-		parent::__construct();
-		$this->DB = mongo_connection('local')->FinTV;
+        parent::__construct();
+        $this->collection = $this->DB()->FinTV->Admin_user;
     }
 	public function getAll()
 	{
-		$collection_user = $this->DB->Admin_user;
-        $cursor_user = $collection_user->find();
+        $cursor_user = $this->collection->find();
         $users = [];
 		foreach($cursor_user as $user){
             $users[] = $user;

@@ -4,6 +4,6 @@
         <img src="/static/admin/images/logo.png" style="height:3rem" />
     </a>
     <a class="px-3" href="javascript:void(0);" style="font-size:1.5rem;text-decoration:none"><i class="fas fa-bars"></i></a>
-    <div class="flex-grow-1 d-flex flex-row justify-content-end px-2"><a href="<?=base_url('admin/user/logout')?>">退出</a></div>
+    <div class="flex-grow-1 d-flex flex-row justify-content-end px-3"><a href="<?=base_url('admin/user/logout')?>">退出</a></div>
 </div>
     

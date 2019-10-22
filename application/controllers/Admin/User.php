@@ -22,4 +22,11 @@ class User extends Admin_Controller {
     public function logout(){
         unset($_SESSION['admin_logined']);
     }
+
+    public function add()
+	{
+        if($this->input->method() === 'post'){
+            $this->viewData['tips']=
+        }
+    }
 }
