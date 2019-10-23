@@ -23,4 +23,8 @@ class AdminUserModel extends CI_Model {
     public function getOneByName($username){
         return $this->collection->findOne(['name'=>$username]);
     }
+
+    public function insert($user){
+        return $this->collection->insertOne($user);
+    }
 }

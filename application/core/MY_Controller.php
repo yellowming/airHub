@@ -129,6 +129,9 @@ class Admin_Controller extends MY_Controller
             'type' => $type
         ];
     }
+    public function setData($key,$val){
+        $this->viewData['data'][$key] = $val;
+    }
     public function viewPrepend($html){
         $this->viewData['template']['prepend'] .= $html;
     }

@@ -1,11 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
-| -------------------------------------------------------------------
-| mongodb
-| -------------------------------------------------------------------
-| 详细文档见https://docs.mongodb.com/php-library/current/
-| -------------------------------------------------------------------
-*/
+
 class CI_Model 
 {
     private $mongoConections;

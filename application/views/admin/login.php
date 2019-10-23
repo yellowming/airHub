@@ -20,18 +20,21 @@
                 <div class="p-2">
                     <form action="<?=current_url()?>" method="post">
                         <div class="form-group">
-                            <label for="email">邮箱:</label>
-                            <input type="email" class="form-control" id="email" placeholder="请输入邮箱">
+                            <label for="inputEmail">邮箱</label>
+                            <input type="email" name="email" value="<?php echo set_value('email'); ?>" class="form-control<?=empty(form_error('email'))?'':' is-invalid'?>" id="inputEmail" placeholder="请输入邮箱">
+                            <div class="invalid-feedback"><?=form_error('email')?></div>
                         </div>
                         <div class="form-group">
-                            <label for="pwd">密码:</label>
-                            <input type="password" class="form-control" id="pwd" placeholder="请输入密码">
+                            <label for="inputPassword">密码</label>
+                            <input type="password" name="password" class="form-control<?=empty(form_error('password'))?'':' is-invalid'?>" id="inputPassword" placeholder="请输入密码">
+                            <div class="invalid-feedback"><?=form_error('password')?></div>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">
                             <input class="form-check-input" type="checkbox"> 保持登录状态
                             </label>
                         </div>
+                        <?=$this->load->view('admin/alert',['alert'=>$alert],true)?>
                         <button type="submit" class="btn btn-primary mt-2">登录</button>
                     </form>
                 </div>

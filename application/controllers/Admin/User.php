@@ -15,9 +15,21 @@ class User extends Admin_Controller {
     }
     public function login()
 	{
+        $this->load->library('form_validation');
         if($this->input->method() === 'post'){
-            $_SESSION['admin_logined'] = true;
-            redirect('/admin');
+            $this->form_validation->set_rules('email', '邮箱', ['trim','required','valid_email']);
+            $this->form_validation->set_rules('password', '密码', ['required','min_length[5]','max_length[20]']);
+            if($this->form_validation->run()){
+                $user = $this->adminUserModel->getOneByEmail(trim($this->input->post('email')));
+                if($user === null) return $this->alert('账户不存在或密码不正确','danger');
+                if(password_verify($this->input->post('password'), $user['pwd'] )){
+                    $_SESSION['admin_logined'] = true;
+                    redirect('/admin');
+                }else{
+                    return $this->alert('账户不存在或密码不正确','danger');
+                }
+            }
+            
         }
     }
     public function logout(){
@@ -26,39 +38,34 @@ class User extends Admin_Controller {
 
     public function add()
 	{
-        $this->breadcrumb();
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', '邮箱', ['required',['is_unique',function($email){
-            $user = $this->adminUserModel->getOneByEmail($email);
-            return $user===null?true:false;
-        }]]);
-        $this->form_validation->set_rules('username', '用户名', ['required',['is_unique',function($username){
-            $user = $this->adminUserModel->getOneByName($username);
-            return $user===null?true:false;
-        }]]);
-        $this->form_validation->set_rules('password', '密码', 'required');
-        $this->form_validation->set_rules('password_confirm', '重复密码', 'required');
-        
-        
+        $this->breadcrumb();
+        $this->setData('is_post',false);
         if($this->input->method() === 'post'){
+            $this->setData('is_post',true);
+            $this->form_validation->set_rules('username', '用户名', ['trim','required','min_length[2]','max_length[10]',['is_unique',function($username){
+                $user = $this->adminUserModel->getOneByName($username);
+                return $user===null?true:false;
+            }]]);
+            $this->form_validation->set_rules('email', '邮箱', ['trim','required','valid_email',['is_unique',function($email){
+                $user = $this->adminUserModel->getOneByEmail($email);
+                return $user===null?true:false;
+            }]]);
+            $this->form_validation->set_rules('password', '密码', ['required','min_length[5]','max_length[20]']);
+            $this->form_validation->set_rules('password_confirm', '重复密码', ['required','matches[password]']);
             if($this->form_validation->run()){
+                $this->load->library('encryption');
+                $insert = [
+                    'name' => trim($this->input->post('username')),
+                    'email' => trim($this->input->post('email')),
+                    'pwd' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
+                    'role_id' => $this->input->post('role_id')
+                ];
+                $insertResult = $this->adminUserModel->insert($insert);
+                if($insertResult->getInsertedCount() === 0) return $this->alert('新增用户失败，请联系程序员','danger');
                 redirect('/admin/user');
-            }else{
-                $this->alert(validation_errors(),'danger');
             }
-            
-        return;
-            $postData = $this->input->post();
-            if(empty($postData['email'])) return $this->alert('请输入邮箱！','danger');
-            if(empty($postData['username'])) return $this->alert('请输入用户名！','danger');
-            if(empty($postData['password'])) return $this->alert('请输入密码！','danger');
-            if(empty($postData['passwordConfirm'])) return $this->alert('请输入重复密码！','danger');
-
-            
         }
     }
 
-    private function isUniqueEmail(){
-
-    }
 }
