@@ -16,6 +16,8 @@
     <div class="d-flex flex-row h-100" style="overflow:hidden">
         <?=$this->load->view('admin/menu',['menuTree'=>$siderMenu],true)?>
         <main class="w-100" id="main">
+            <?=$this->load->view('admin/breadcrumb',['breadcrumb'=>$breadcrumb,'uriPath'=>$uriPath],true)?>
+            <?=$this->load->view('admin/alert',['alert'=>$alert],true)?>
             <?=$this->load->view($template['path'],$data,true)?>
         </main>
     </div>

@@ -27,7 +27,7 @@ class Admin_Controller extends MY_Controller
         $this->login_verify();//检查登录
         $this->viewData = [
             'metal' => [],
-            'siderMenu' => [],
+            'siderMenu' => '',
             'title' => '',
             'data' => [],
             'template' => [
@@ -35,7 +35,9 @@ class Admin_Controller extends MY_Controller
                 'prepend' => '',
                 'append' => ''
             ],
-            'alert' => []
+            'alert' => [],
+            'breadcrumb' => false,
+            'uriPath' => []
         ];
     }
 
@@ -49,7 +51,10 @@ class Admin_Controller extends MY_Controller
             call_user_func_array(array($this, $method), $params);
             if($is_ajax){
                 if($is_pjax){
+                    $this->setUriPath();
                     echo $this->viewData['template']['prepend'];
+                    echo $this->load->view('admin/breadcrumb',['breadcrumb'=>$this->viewData['breadcrumb'],'uriPath'=>$this->viewData['uriPath']],true);
+                    echo $this->load->view('admin/alert',['alert'=>$this->viewData['alert']],true);
                     echo $this->load->view($this->viewData['template']['path'],$this->viewData['data'],true);
                     echo $this->viewData['template']['append'];
                     return;
@@ -58,9 +63,9 @@ class Admin_Controller extends MY_Controller
             }
             $dirArr = explode("/", rtrim($this->router->directory, "/"));
             if(in_array($this->loginUri, $this->currentUri)){
-                
                 return $this->load->view($dirArr[0].'/login', $this->viewData);
             }else{
+                $this->setUriPath();
                 $this->viewData['siderMenu'] = $this->renderSiderMenuTree();
                 return $this->load->view($dirArr[0].'/index', $this->viewData);
             }
@@ -91,37 +96,37 @@ class Admin_Controller extends MY_Controller
         $html = '';
         $hasActive = false;
         foreach($uris as $index=>$uri){
+            $isActive = in_array($uri, $this->viewData['uriPath']);
+            if($isActive) $hasActive = true;
             if($uri['uri']){
-                $isActiveUri = in_array($uri['uri'], $this->currentUri);
-                if($isActiveUri) $hasActive = true;
-                $html .= '<li'.($isActiveUri?' class="active"':'').'><a href="'.base_url($uri['uri']).'"><i class="'.($uri['icon']?$uri['icon']:'far fa-circle').'"></i> '.$uri['name'].'</a></li>';
+                $html .= '<li'.($isActive?' class="active"':'').'><a href="'.base_url($uri['uri']).'"><i class="'.($uri['icon']?$uri['icon']:'far').'"></i> '.$uri['name'].'</a></li>';
             }else{
                 $new_prefix = $prefix.'_'.$index;
                 $sub_menu = $this->renderSiderMenuTree($new_prefix, $uri['_id']);
-                if($sub_menu["html"] !== ''){
-                    $html .= '<li'.($sub_menu["hasActive"]?' class="active"':'').'><span data-target="#'.$new_prefix.'" data-toggle="collapse"><i class="'.($uri['icon']?$uri['icon']:'far fa-circle').'"></i> '.$uri['name'].'</span>';
-                    $html .= $sub_menu["html"];
-                    $html .= '</li>';
-                }
+                $html .= '<li'.($isActive?' class="active"':'').'><span data-target="#'.$new_prefix.'" data-toggle="collapse"><i class="'.($uri['icon']?$uri['icon']:'far').'"></i> '.$uri['name'].'</span>';
+                $html .= $sub_menu;
+                $html .= '</li>';
             }
         }
-
         if($pid == null){
             return '<ul id="'.$prefix.'" style="width:15rem">'.$html.'</ul>';
         }else{
             $prefix_arr = explode("_", $prefix);
             array_pop($prefix_arr);
-            return [
-                'html' => '<ul class="collapse'.($hasActive?' show':'').'" id="'.$prefix.'" data-parent="#'.implode("_", $prefix_arr).'">'.$html.'</ul>',
-                'hasActive' => $hasActive
-            ];
+            return '<ul class="collapse'.($hasActive?' show':'').'" id="'.$prefix.'" data-parent="#'.implode("_", $prefix_arr).'">'.$html.'</ul>';
         }
+    }
+    private function setUriPath(){
+        $this->viewData['uriPath'] = $this->adminUriModel->getCurrentPath($this->currentUri);
+    }
+    public function breadcrumb(){
+        $this->viewData['breadcrumb'] = true;
     }
 
     public function alert($content = '', $type = 'primary'){
         $this->viewData['alert'][] = [
             'content' => $content,
-            'type' => $tpye
+            'type' => $type
         ];
     }
     public function viewPrepend($html){
@@ -130,6 +135,5 @@ class Admin_Controller extends MY_Controller
     public function viewAppend($html){
         $this->viewData['template']['append'] .= $html;
     }
-
     
 }

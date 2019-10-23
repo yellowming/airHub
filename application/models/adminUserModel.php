@@ -14,5 +14,13 @@ class AdminUserModel extends CI_Model {
             $users[] = $user;
         }
         return $users;
-	}
+    }
+    public function getOneByEmail($email)
+	{
+        return $this->collection->findOne(['email'=>$email]);
+    }
+    
+    public function getOneByName($username){
+        return $this->collection->findOne(['name'=>$username]);
+    }
 }

@@ -10,11 +10,13 @@
       }).on('pjax:send', function() {
         NProgress.start()
         NProgress.set(0.4)
-      }).on('pjax:complete', function() {
+      }).on('pjax:beforeReplace', function() {
         NProgress.set(0.8)
         NProgress.inc()
-      }).on('pjax:complete', function() {
+      }).on('pjax:end', function() {
         NProgress.done()
+      }).on('pjax:error',function(){
+        //alert(1)
       })
     }
     var $menuItems = $('#menu li>a,#menu li>span');

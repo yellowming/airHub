@@ -16,14 +16,15 @@ body {
     color:#fff;
     text-decoration: none;
   }
-  .top-nav-brand{
-    
+  .top-nav-brand.bg-dark:hover{
+    background-color: inherit !important;
   }
   
   /*
    * Sidebar
    */
   
+   
   .sidebar ul{
     margin:0;
     padding: 0;
@@ -74,8 +75,7 @@ body {
   
 
   .sidebar>ul>li>a,.sidebar>ul>li>span{
-    height: 3.2rem;
-    line-height: 3.2rem;
+    line-height: 3rem;
   }
 
 

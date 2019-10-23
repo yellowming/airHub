@@ -24,4 +24,26 @@ class AdminUriModel extends CI_Model {
         }
         return $uris;
     }
+    public function getCurrentPath($currArr){
+        $result = [];
+        $current = $this->collection->findOne(['uri'=>['$in'=>$currArr]]);
+        if($current){
+            $parents = $this->getParents($current['parent_id']);
+            $parents[] = $current;
+            $result = $parents;
+        }
+        return $result;
+    }
+    public function getParents($pid){
+        $result = [];
+        if($pid){
+            $parent = $this->collection->findOne(['_id'=>$pid]);
+            if($parent){
+                $parents = $this->getParents($parent['parent_id']);
+                $parents[] = $parent;
+                $result = $parents;
+            }
+        }
+        return $result;
+    }
 }
