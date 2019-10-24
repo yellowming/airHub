@@ -1,4 +1,4 @@
-<?php if($breadcrumb):?>
+<?php if($breadcrumb && !empty($uriPath)):?>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=base_url('admin')?>"><i class="fas fa-home"></i> 首页</a></li>

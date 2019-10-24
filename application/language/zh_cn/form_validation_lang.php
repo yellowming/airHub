@@ -39,13 +39,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['form_validation_required']		= '请填写{field}';
 $lang['form_validation_isset']			= 'The {field} field must have a value.';
-$lang['form_validation_valid_email']		= 'The {field} field must contain a valid email address.';
+$lang['form_validation_valid_email']		= '{field}格式不正确';
 $lang['form_validation_valid_emails']		= 'The {field} field must contain all valid email addresses.';
 $lang['form_validation_valid_url']		= 'The {field} field must contain a valid URL.';
 $lang['form_validation_valid_ip']		= 'The {field} field must contain a valid IP.';
 $lang['form_validation_valid_base64']		= 'The {field} field must contain a valid Base64 string.';
-$lang['form_validation_min_length']		= 'The {field} field must be at least {param} characters in length.';
-$lang['form_validation_max_length']		= 'The {field} field cannot exceed {param} characters in length.';
+$lang['form_validation_min_length']		= '{field}不得小于{param}个字符串长度';
+$lang['form_validation_max_length']		= '{field}不得大于{param}个字符串长度';
 $lang['form_validation_exact_length']		= 'The {field} field must be exactly {param} characters in length.';
 $lang['form_validation_alpha']			= 'The {field} field may only contain alphabetical characters.';
 $lang['form_validation_alpha_numeric']		= 'The {field} field may only contain alpha-numeric characters.';
