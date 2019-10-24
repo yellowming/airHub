@@ -24,7 +24,7 @@ class Admin_Controller extends MY_Controller
         if($this->router->method === 'index') $this->currentUri[] = $this->router->directory.$this->router->class;
         if($this->router->class === $this->router->default_controller) $this->currentUri[] = rtrim($this->router->directory, "/");
         $this->loginUri = 'admin/user/login';
-        $this->login_verify();//检查登录
+
         $this->viewData = [
             'metal' => [],
             'siderMenu' => '',
@@ -43,35 +43,27 @@ class Admin_Controller extends MY_Controller
 
     public function _remap($method, $params = array())
     {
+        $this->login_verify();//检查登录
         $is_ajax = $this->input->is_ajax_request();
         $is_pjax = $this->input->server('HTTP_X_PJAX');
+        $dirArr = explode("/", rtrim($this->router->directory, "/"));
         $this->viewData['template']['path'] = $this->router->directory.$this->router->class.'_'.$method;
-        if($is_ajax && !$is_pjax) $method = $method.'_'.$this->input->method();
-        if (method_exists($this, $method)){
-            call_user_func_array(array($this, $method), $params);
-            if($is_ajax){
-                if($is_pjax){
-                    $this->setUriPath();
-                    echo $this->viewData['template']['prepend'];
-                    echo $this->load->view('admin/breadcrumb',['breadcrumb'=>$this->viewData['breadcrumb'],'uriPath'=>$this->viewData['uriPath']],true);
-                    echo $this->load->view('admin/alert',['alert'=>$this->viewData['alert']],true);
-                    echo $this->load->view($this->viewData['template']['path'],$this->viewData['data'],true);
-                    echo $this->viewData['template']['append'];
-                    return;
-                }
-                return $this->output->set_content_type('application/json')->set_output(json_encode($this->viewData['data']));
-            }
-            $dirArr = explode("/", rtrim($this->router->directory, "/"));
-            if(in_array($this->loginUri, $this->currentUri)){
-                return $this->load->view($dirArr[0].'/login', $this->viewData);
-            }else{
-                $this->setUriPath();
-                $this->viewData['siderMenu'] = $this->renderSiderMenuTree();
-                return $this->load->view($dirArr[0].'/index', $this->viewData);
-            }
-        }else{
-            show_404();
+        if (!method_exists($this, $method)) show_404();
+        call_user_func_array(array($this, $method), $params);
+        if(in_array($this->loginUri, $this->currentUri)){
+            return $this->load->view($dirArr[0].'/login', $this->viewData);
         }
+        $this->setUriPath();
+        if($is_pjax){
+            $this->load->view('admin/string',['string'=>$this->viewData['template']['prepend']]);
+            $this->load->view('admin/breadcrumb',['breadcrumb'=>$this->viewData['breadcrumb'],'uriPath'=>$this->viewData['uriPath']]);
+            $this->load->view('admin/alert',['alert'=>$this->viewData['alert']]);
+            $this->load->view($this->viewData['template']['path'],$this->viewData['data']);
+            $this->load->view('admin/string',['string'=>$this->viewData['template']['append']]);
+            return;
+        }
+        $this->viewData['siderMenu'] = $this->renderSiderMenuTree();
+        return $this->load->view($dirArr[0].'/index', $this->viewData);
     }
 
     public function _output($output)
@@ -88,6 +80,23 @@ class Admin_Controller extends MY_Controller
         }elseif($logined && $isLoginPage){
             redirect('/admin');
         }
+    }
+
+    private function uri_match_current($uri){
+        $dirArr = explode("/", trim($this->router->directory,'/'));
+        $rsegments = $this->router->uri->rsegments;
+        $segment = array_values(array_merge($dirArr,$rsegments));
+
+        $uriArr = explode("/", trim($uri,'/'));
+        $countDistance = count($segment) - count($uriArr);
+        if($countDistance < 0) return false;
+        if($countDistance > 2) return false;
+        if($countDistance == 1) array_push($uriArr, 'index');
+        if($countDistance == 2) array_push($uriArr, $this->router->default_controller, 'index');
+        foreach($uriArr as $k=>$item){
+            if($item !== $segment[$k]) return false;
+        }
+        return true;
     }
 
     
@@ -129,7 +138,7 @@ class Admin_Controller extends MY_Controller
             'type' => $type
         ];
     }
-    public function setData($key,$val){
+    public function setData($key,$val=false){
         $this->viewData['data'][$key] = $val;
     }
     public function viewPrepend($html){

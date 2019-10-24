@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminUserModel extends CI_Model {
-    private $collection;
+    public $collection;
 	public function __construct()
     {
         parent::__construct();
@@ -23,8 +23,10 @@ class AdminUserModel extends CI_Model {
     public function getOneByName($username){
         return $this->collection->findOne(['name'=>$username]);
     }
-
     public function insert($user){
         return $this->collection->insertOne($user);
+    }
+    public function deleteOne($where){
+        return $this->collection->insertOne($where);
     }
 }

@@ -8,7 +8,7 @@
                         <div class="col-8">
                             <div class="form-group">
                                 <label for="inputUserName">用户名</label>
-                                <input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control<?=$is_post?(empty(form_error('username'))?' is-valid':' is-invalid'):''?>" id="inputUserName">
+                                <input type="text" name="username" value="<?=$is_post?set_value('username'):$name ?>" class="form-control<?=$is_post?(empty(form_error('username'))?' is-valid':' is-invalid'):''?>" id="inputUserName">
                                 <div class="invalid-feedback"><?=form_error('username')?></div>
                             </div>
                             <div class="form-group">

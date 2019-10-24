@@ -15,8 +15,9 @@
         NProgress.inc()
       }).on('pjax:end', function() {
         NProgress.done()
+        $('.modal-backdrop').remove();
       }).on('pjax:error',function(){
-        //alert(1)
+        
       })
     }
     var $menuItems = $('#menu li>a,#menu li>span');
