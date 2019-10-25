@@ -26,6 +26,9 @@ class AdminUserModel extends CI_Model {
     public function insert($user){
         return $this->collection->insertOne($user);
     }
+    public function update($filter, $update){
+        return $this->collection->updateOne($filter, $update);
+    }
     public function deleteOne($where){
         return $this->collection->insertOne($where);
     }
