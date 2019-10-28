@@ -44,7 +44,7 @@ EOF;
                 $user = $this->adminUserModel->getOneByEmail(trim($this->input->post('email')));
                 if($user === null) return $this->alert('账户不存在或密码不正确','danger');
                 if(password_verify($this->input->post('password'), $user['pwd'] )){
-                    $_SESSION['admin_logined'] = true;
+                    $_SESSION['admin_logined'] = $user['_id'];
                     redirect('/admin');
                 }else{
                     return $this->alert('账户不存在或密码不正确','danger');
@@ -69,7 +69,7 @@ EOF;
             return $user===null?true:false;
         }]]);
         $this->form_validation->set_rules('password', '密码', ['required','min_length[5]','max_length[20]']);
-        $this->form_validation->set_rules('role_id', '角色', 'required');
+        //$this->form_validation->set_rules('role_id', '角色', 'required');
         $this->setData('is_post',false);
         if($this->input->method() === 'post'){
             $this->setData('is_post',true);
@@ -78,7 +78,7 @@ EOF;
                     'email' => trim($this->input->post('email')),
                     'name' => trim($this->input->post('username')),
                     'pwd' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
-                    'role_id' => $this->input->post('role_id'),
+                    //'role_id' => $this->input->post('role_id'),
                     'avatar' => null
                 ];
                 $insertResult = $this->adminUserModel->insert($insert);
@@ -94,7 +94,7 @@ EOF;
 
     public function edit($id = null){
         if(!$id) show_404();
-        $ObjectId = new MongoDB\BSON\ObjectId($id);
+        try {$ObjectId = new MongoDB\BSON\ObjectId($id); } catch (\Throwable $th)  {show_404();}
         $user = $this->adminUserModel->collection->findOne(['_id'=>$ObjectId]);
         if(!$user) show_404();
         foreach($user as $key=>$item){
@@ -115,12 +115,12 @@ EOF;
                 return $user===null?true:false;
             }]]);
             $this->form_validation->set_rules('pwd', '密码', ['min_length[5]','max_length[20]']);
-            $this->form_validation->set_rules('role_id', '角色', 'required');
+            //$this->form_validation->set_rules('role_id', '角色', 'required');
             if($this->form_validation->run()){
                 $update = [
                     'email' => trim($this->input->post('email')),
                     'name' => trim($this->input->post('name')),
-                    'role_id' => $this->input->post('role_id'),
+                    //'role_id' => $this->input->post('role_id'),
                     'avatar' => null
                 ];
                 $update['pwd'] = empty($this->input->post('pwd'))?$user['pwd']:password_hash($this->input->post('pwd'),PASSWORD_DEFAULT);

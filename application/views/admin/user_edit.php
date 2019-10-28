@@ -22,16 +22,7 @@
                                 <small id="passwordHelpBlock" class="form-text text-muted">为空则不修改密码</small>
                                 <div class="invalid-feedback"><?=form_error('pwd')?></div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputRole">角色</label>
-                                <select class="form-control<?=$is_post?(empty(form_error('role_id'))?' is-valid':' is-invalid'):''?>" name="role_id" id="inputRole">
-                                    <option value="1" <?=($is_post?set_value('role_id'):$role_id)=='1'?'selected':''?>>管理员</option>
-                                    <option value="2" <?=($is_post?set_value('role_id'):$role_id)=='2'?'selected':''?>>编辑员</option>
-                                    <option value="3" <?=($is_post?set_value('role_id'):$role_id)=='3'?'selected':''?>>审核员</option>
-                                    <option value="4" <?=($is_post?set_value('role_id'):$role_id)=='4'?'selected':''?>>实习生</option>
-                                </select>
-                                <div class="invalid-feedback"><?=form_error('role_id')?></div>
-                            </div>
+                            
                         </div>
                         <div class="col-4">
                             <div class="form-group">
