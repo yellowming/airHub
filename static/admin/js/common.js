@@ -5,7 +5,7 @@
     NProgress.configure({ showSpinner: false });
     if ($.support.pjax) {
       $.pjax.defaults.timeout = 6000
-      $(document).pjax('a', '#main').on('submit', 'form', function(event) {
+      $(document).pjax('a:not(.pjax-disabled)', '#main').on('submit', 'form:not(.pjax-disabled)', function(event) {
         $.pjax.submit(event, '#main')
       }).on('pjax:send', function() {
         NProgress.start()

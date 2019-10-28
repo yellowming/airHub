@@ -15,7 +15,13 @@ class CI_Model
         if (!isset($mongoConfig[$conection])){
             show_error("The Database {$conection} must be configured", 500);
         }
-        return new MongoDB\Client($mongoConfig[$conection]);
+        return new MongoDB\Client($mongoConfig[$conection],[],[
+            'typeMap' => [
+                'array' => 'array',
+                'document' => 'array',
+                'root' => 'array',
+            ],
+        ]);
     }
     /*
     | -------------------------------------------------------------------

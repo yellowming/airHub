@@ -1,10 +1,4 @@
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=base_url('admin')?>">首页</a></li>
-        <li class="breadcrumb-item active" aria-current="page">图标</li>
-    </ol>
-</nav>
 <div class="container-fluid pb-3">
     <div class="row" id="icon_row">
         <?php foreach($icons as $key=>$icon): ?>

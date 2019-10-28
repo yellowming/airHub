@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Uri extends Admin_Controller {
+class Setting extends Admin_Controller {
     function __construct()
     {
         parent::__construct();
-        
+        $this->load->model('adminRoleModel');
     }
 	public function index()
 	{
-        $uris = $this->adminUriModel->getAll();
-        $this->viewData['data']['uris'] = $uris;
+        $roles = $this->adminRoleModel->collection->find();
+        $this->setData('roles',$roles);
         $this->breadcrumb();
 	}
 }

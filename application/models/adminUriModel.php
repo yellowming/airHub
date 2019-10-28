@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminUriModel extends CI_Model {
-    private $collection;
+    public $collection;
     function __construct()
     {
         parent::__construct();
