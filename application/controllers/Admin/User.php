@@ -9,7 +9,6 @@ class User extends Admin_Controller {
     }
 	public function index()
 	{
-        $this->breadcrumb();
         if($this->input->post('_id')){
             $deleteResult = $this->adminUserModel->collection->deleteOne(['_id'=>new MongoDB\BSON\ObjectId($this->input->post('_id'))]);
             if($deleteResult->getDeletedCount() === 0){
@@ -18,8 +17,13 @@ class User extends Admin_Controller {
                 $this->alert('删除成功！');
             }
         }
-        $users = $this->adminUserModel->getAll();
-        $this->viewData['data']['users'] = $users;
+        $users = $this->adminUserModel->collection->find();
+        foreach($users as $k=>$user){
+            //dump(cursor2array($user["roles"]));
+            //$users[$k]["roles"] = $this->adminRoleModel->collection->find(["_id"=>['$in'=>cursor2array($user["roles"])]]);
+        }
+        dump(cursor2array($users));
+        $this->setData('users',$users);
         $js = <<<EOF
         <script>
             $('#userDeleConfirmModal').on('show.bs.modal', function (event) {
@@ -69,7 +73,6 @@ EOF;
             return $user===null?true:false;
         }]]);
         $this->form_validation->set_rules('password', '密码', ['required','min_length[5]','max_length[20]']);
-        //$this->form_validation->set_rules('role_id', '角色', 'required');
         $this->setData('is_post',false);
         if($this->input->method() === 'post'){
             $this->setData('is_post',true);
@@ -89,7 +92,6 @@ EOF;
                 }   
             }
         }
-        $this->breadcrumb();
     }
 
     public function edit($id = null){
@@ -102,6 +104,7 @@ EOF;
         }
         $this->load->library('form_validation');
         $this->setData('is_post',false);
+        $this->setData('roleAll',$this->adminRoleModel->collection->find());
         if($this->input->method() === 'post'){
             $this->setData('is_post',true);
             $this->form_validation->set_rules('email', '邮箱', ['trim','required','valid_email',['is_unique',function($email) use ($user){
@@ -115,14 +118,17 @@ EOF;
                 return $user===null?true:false;
             }]]);
             $this->form_validation->set_rules('pwd', '密码', ['min_length[5]','max_length[20]']);
-            //$this->form_validation->set_rules('role_id', '角色', 'required');
             if($this->form_validation->run()){
                 $update = [
                     'email' => trim($this->input->post('email')),
                     'name' => trim($this->input->post('name')),
-                    //'role_id' => $this->input->post('role_id'),
+                    'roles' => [],
                     'avatar' => null
                 ];
+                $roles = $this->input->post('roles');
+                if(!empty($roles)){
+                    foreach($roles as $role) $update['roles'][] = new MongoDB\BSON\ObjectId($role);
+                }
                 $update['pwd'] = empty($this->input->post('pwd'))?$user['pwd']:password_hash($this->input->post('pwd'),PASSWORD_DEFAULT);
                 $updateResult = $this->adminUserModel->update(['_id' => $ObjectId],[ '$set' => $update]);
                 if($updateResult->getModifiedCount()===0 || $updateResult->getMatchedCount()===0){
@@ -132,6 +138,5 @@ EOF;
                 }
             }
         }
-        $this->breadcrumb();
     }
 }

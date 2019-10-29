@@ -22,7 +22,19 @@
                                 <small id="passwordHelpBlock" class="form-text text-muted">为空则不修改密码</small>
                                 <div class="invalid-feedback"><?=form_error('pwd')?></div>
                             </div>
-                            
+                            <div class="form-group">
+                                <label>角色</label>
+                                <div class="card p-2">
+                                    <?php $selectedRoles = $is_post?set_value('roles[]'):$roles;?>
+                                    <?php foreach($roleAll as $role):?>
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" <?=in_array($role['_id'],$selectedRoles)?'checked':''?> name="roles[]" type="checkbox" id="role_<?=$role['_id']?>" value="<?=$role['_id']?>">
+                                            <label class="custom-control-label" for="role_<?=$role['_id']?>"><?=$role['name']?></label>
+                                            <small class="form-text text-muted"><?=$role['description']?></small>
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">

@@ -7,8 +7,6 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
         
 	}
-
-    
 }
 
 class Admin_Controller extends MY_Controller
@@ -17,6 +15,8 @@ class Admin_Controller extends MY_Controller
     public $loginUri;
     public $currentUri;
     public $user;
+    public $hasAccess;
+    public $access_uris;
     function __construct()
     {
         parent::__construct();
@@ -36,7 +36,7 @@ class Admin_Controller extends MY_Controller
                 'append' => ''
             ],
             'alert' => [],
-            'breadcrumb' => false,
+            'breadcrumb' => true,
             'uriPath' => []
         ];
     }
@@ -48,32 +48,34 @@ class Admin_Controller extends MY_Controller
         $logined = isset($_SESSION['admin_logined']);
         if($isLoginPage && $logined) redirect('/admin');
         if(!$isLoginPage && !$logined) redirect($this->loginUri);
+        $this->hasAccess = true;
         if($logined){
             $this->user = $this->adminUserModel->collection->findOne(['_id'=>$_SESSION['admin_logined']]);
             if(!$this->user){
                 unset($_SESSION['admin_logined']);
                 redirect($this->loginUri);
             }
-            $access_uris = [];
+            
             $roles = null;
             if(isset($this->user['roles']) && !empty($this->user['roles'])) $roles = $this->adminRoleModel->collection->find(['_id'=>['$in'=>$this->user['roles']]]);
+            $this->access_uris = [];
             if($roles !== null){
-                foreach($roles as $role) $access_uris = array_merge($access_uris, $role['access_uri']);
+                foreach($roles as $role) $this->access_uris = array_merge($this->access_uris, $role['access_uri']);
             }
             $uriPaths = $this->viewData['uriPath'] = $this->adminUriModel->getCurrentPath($this->currentUri);
-            
-            $exactUriID = $uriPaths[count($uriPaths)-1]['_id'];
-            $hasAccess = false;
-            dump(in_array($exactUriID,$access_uris));
+            if(!empty($uriPaths)){
+                $exactUriID = $uriPaths[count($uriPaths)-1]['_id'];
+                $this->hasAccess = in_array($exactUriID,$this->access_uris);
+            }
         }
-        call_user_func_array(array($this, $method), $params);
+        if($this->hasAccess) call_user_func_array(array($this, $method), $params);
         $this->renderVidew();
     }
 
     private function renderVidew(){
         $is_pjax = $this->input->server('HTTP_X_PJAX');
         $dirArr = explode("/", rtrim($this->router->directory, "/"));
-        $this->viewData['template']['path'] = $this->router->directory.$this->router->class.'_'.$this->router->method;
+        $this->viewData['template']['path'] = $this->hasAccess ? $this->router->directory.$this->router->class.'_'.$this->router->method : 'admin/accessForbidden';
         if(in_array($this->loginUri, $this->currentUri)){
             return $this->load->view($dirArr[0].'/login', $this->viewData);
         }
@@ -92,7 +94,6 @@ class Admin_Controller extends MY_Controller
     public function _output($output)
     {
         echo $output;
-        //dump($this->router);
     }
 
 
@@ -102,6 +103,7 @@ class Admin_Controller extends MY_Controller
         $html = '';
         $hasActive = false;
         foreach($uris as $index=>$uri){
+            if(!in_array($uri['_id'], $this->access_uris)) continue;
             $isActive = in_array($uri, $this->viewData['uriPath']);
             if($isActive) $hasActive = true;
             if($uri['uri']){
@@ -121,10 +123,6 @@ class Admin_Controller extends MY_Controller
             array_pop($prefix_arr);
             return '<ul class="collapse'.($hasActive?' show':'').'" id="'.$prefix.'" data-parent="#'.implode("_", $prefix_arr).'">'.$html.'</ul>';
         }
-    }
-    
-    public function breadcrumb(){
-        $this->viewData['breadcrumb'] = true;
     }
 
     public function alert($content = '', $type = 'primary'){

@@ -11,6 +11,5 @@ class Setting extends Admin_Controller {
 	{
         $roles = $this->adminRoleModel->collection->find();
         $this->setData('roles',$roles);
-        $this->breadcrumb();
 	}
 }

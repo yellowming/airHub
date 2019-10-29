@@ -8,16 +8,22 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">邮箱</th>
                 <th scope="col">名称</th>
+                <th scope="col">邮箱</th>
+                <th scope="col">角色</th>
                 <th scope="col">操作</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($users as $user):?>
                 <tr>
+                    <th><?=$user['name']?></th>
                     <td scope="row"><?=$user['email']?></td>
-                    <td><?=$user['name']?></td>
+                    <td scope="col">
+                      <?php foreach($user['roles'] as $role_id):?>
+                        <?=$role_id?>///
+                      <?php endforeach?>
+                    </td>
                     <td>
                         <a class="btn btn-sm btn-warning" href="<?=base_url('admin/user/edit/'.$user['_id'])?>" role="button">修改</a>
                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#userDeleConfirmModal" data-id="<?=$user['_id']?>" data-name="<?=$user['name']?>">删除</button>

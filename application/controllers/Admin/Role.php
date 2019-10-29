@@ -11,7 +11,39 @@ class Role extends Admin_Controller {
 	{
         $roles = $this->adminRoleModel->collection->find();
         $this->setData('roles',$roles);
-        $this->breadcrumb();
+    }
+
+    public function add()
+	{
+        $this->load->library('form_validation');
+        $this->setData('is_post',false);
+        $access_uri = [];
+        if($this->input->method() === 'post'){
+            $this->setData('is_post',true);
+            $this->form_validation->set_rules('name', '权限名称', ['trim','required','min_length[2]','max_length[12]',['is_unique',function($name){
+                $role = $this->adminRoleModel->collection->findOne(['name'=>$name]);
+                return $role===null?true:false;
+            }]]);
+            $this->form_validation->set_rules('description', '描述', ['min_length[5]','max_length[20]']);
+            if($this->form_validation->run()){
+                $insert = [
+                    'name' => trim($this->input->post('name')),
+                    'description' => $this->input->post('description'),
+                    'access_uri' => []
+                ];
+                $access_uri = $this->input->post('access_uri');
+                if(!empty($access_uri)){
+                    foreach($access_uri as $uri) $insert['access_uri'][] = new MongoDB\BSON\ObjectId($uri);
+                }
+                $insertResult = $this->adminRoleModel->collection->insertOne($insert);
+                if($insertResult->getInsertedCount()===0){
+                    $this->alert('新增失败，请联系程序员','danger');
+                }else{
+                    redirect('/admin/role');
+                }
+            }
+        }
+        $this->setData('uriHtml',$this->render_uri_checkbox(null, $access_uri));
     }
     
     public function edit($id)
@@ -24,24 +56,23 @@ class Role extends Admin_Controller {
             $this->setData($key,$item);
         }
         $access_uri = [];
-        foreach($role['access_uri'] as $u) $access_uri[] = $u;
         $this->load->library('form_validation');
         $this->setData('is_post',false);
         if($this->input->method() === 'post'){
             $this->setData('is_post',true);
-            $this->form_validation->set_rules('name', '权限名称', ['trim','required','min_length[3]','max_length[12]',['is_unique',function($name) use ($role){
+            $this->form_validation->set_rules('name', '权限名称', ['trim','required','min_length[2]','max_length[12]',['is_unique',function($name) use ($role){
                 if($name === $role['name']) return true;
                 $role = $this->adminRoleModel->collection->findOne(['name'=>$name]);
                 return $role===null?true:false;
             }]]);
             $this->form_validation->set_rules('description', '描述', ['min_length[5]','max_length[20]']);
+            $access_uri = $this->input->post('access_uri');
             if($this->form_validation->run()){
                 $update = [
                     'name' => trim($this->input->post('name')),
                     'description' => $this->input->post('description'),
                     'access_uri' => []
                 ];
-                $access_uri = $this->input->post('access_uri');
                 if(!empty($access_uri)){
                     foreach($access_uri as $uri) $update['access_uri'][] = new MongoDB\BSON\ObjectId($uri);
                 }
@@ -52,10 +83,11 @@ class Role extends Admin_Controller {
                     redirect('/admin/role');
                 }
             }
+        }else{
+            foreach($role['access_uri'] as $u) $access_uri[] = $u;
         }
         
         $this->setData('uriHtml',$this->render_uri_checkbox(null, $access_uri));
-        $this->breadcrumb();
     }
     
     private function render_uri_checkbox($pid = null, $checked = []){
@@ -63,7 +95,7 @@ class Role extends Admin_Controller {
         $html = "";
         foreach($uris as $uri){
             $isChecked = in_array($uri["_id"], $checked);
-            $html .= '<div class="custom-control custom-checkbox custom-checkbox-lg">';
+            $html .= '<div class="custom-control custom-checkbox">';
             $html .= '<input class="custom-control-input" '.($isChecked?'checked':'').' name="access_uri[]" type="checkbox" id="uri_'.$uri["_id"].'" value="'.$uri["_id"].'">';
             $html .= '<label class="custom-control-label" for="uri_'.$uri["_id"].'">'.$uri["name"].'</label>';
             $html .= $this->render_uri_checkbox($uri["_id"], $checked);

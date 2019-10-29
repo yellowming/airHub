@@ -25,5 +25,6 @@ class Welcome extends Admin_Controller {
 			'b' => 22222222,
 			'c' => 33333333
 		];
+		$this->viewData['breadcrumb'] = false;
 	}
 }

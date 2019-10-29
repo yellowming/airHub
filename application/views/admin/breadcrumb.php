@@ -10,8 +10,8 @@
                         $uri = $item['uri'];
                         $name = $item['name'];
                         foreach($item['parame'] as $k=>$v){
-                            $uri .= '/'.$this->viewData['data'][$k];
-                            $name .= '['.$this->viewData['data'][$v].']';
+                            $uri .= isset($this->viewData['data'][$k]) ? ('/'.$this->viewData['data'][$k]) : '';
+                            $name .= isset($this->viewData['data'][$v]) ? '['.$this->viewData['data'][$v].']' : '';
                         }
                     ?>
                     <a href="<?=base_url($uri)?>"><?=$name?></a>

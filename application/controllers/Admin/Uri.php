@@ -11,6 +11,5 @@ class Uri extends Admin_Controller {
 	{
         $uris = $this->adminUriModel->getAll();
         $this->viewData['data']['uris'] = $uris;
-        $this->breadcrumb();
 	}
 }
