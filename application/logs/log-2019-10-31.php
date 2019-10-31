@@ -265,3 +265,156 @@ ERROR - 2019-10-31 09:30:12 --> Could not find the specified $config['composer_a
 DEBUG - 2019-10-31 09:30:12 --> UTF-8 Support Enabled
 DEBUG - 2019-10-31 09:30:12 --> Global POST, GET and COOKIE data sanitized
 ERROR - 2019-10-31 09:30:12 --> 404 Page Not Found: admin/Sdfdsffdd/index
+ERROR - 2019-10-31 14:39:39 --> Could not find the specified $config['composer_autoload'] path: ./vendor/autoload.php
+DEBUG - 2019-10-31 14:39:39 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:39:40 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:39:40 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:39:40 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 14:39:40 --> Severity: error --> Exception: Class 'MongoDB\Client' not found F:\www\airHub\application\core\Model.php 18
+ERROR - 2019-10-31 14:39:51 --> Could not find the specified $config['composer_autoload'] path: ./vendor/autoload.php
+DEBUG - 2019-10-31 14:39:51 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:39:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:39:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:39:51 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 14:39:51 --> Severity: error --> Exception: Class 'MongoDB\Client' not found F:\www\airHub\application\core\Model.php 18
+ERROR - 2019-10-31 14:40:46 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:40:46 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:40:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:40:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:40:46 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 14:40:46 --> Severity: error --> Exception: Class 'MongoDB\Client' not found F:\www\airHub\application\core\Model.php 18
+ERROR - 2019-10-31 14:40:47 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:40:47 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:40:47 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:40:47 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:40:47 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 14:40:47 --> Severity: error --> Exception: Class 'MongoDB\Client' not found F:\www\airHub\application\core\Model.php 18
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:54:00 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:54:00 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:54:00 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 14:54:00 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-10-31 14:54:00 --> Total execution time: 0.0812
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 14:54:00 --> 404 Page Not Found: Static/admin
+ERROR - 2019-10-31 14:54:00 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 14:54:00 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 14:54:00 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 14:54:00 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 14:54:00 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 14:54:00 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 14:54:00 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> No URI present. Default controller set.
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:41 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> No URI present. Default controller set.
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:41 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-10-31 15:07:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:41 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-10-31 15:07:41 --> Total execution time: 0.0981
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:41 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-10-31 15:07:41 --> Total execution time: 0.0974
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:41 --> 404 Page Not Found: Static/plugins
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:41 --> 404 Page Not Found: Static/admin
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+ERROR - 2019-10-31 15:07:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:41 --> 404 Page Not Found: Static/plugins
+DEBUG - 2019-10-31 15:07:41 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:41 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/plugins
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/admin
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/plugins
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+ERROR - 2019-10-31 15:07:42 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:42 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/plugins
+DEBUG - 2019-10-31 15:07:42 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:42 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:07:46 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:46 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:46 --> No URI present. Default controller set.
+DEBUG - 2019-10-31 15:07:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:46 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 15:07:46 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:46 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:46 --> No URI present. Default controller set.
+DEBUG - 2019-10-31 15:07:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:46 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+ERROR - 2019-10-31 15:07:46 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:46 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-10-31 15:07:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-10-31 15:07:46 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-10-31 15:07:46 --> Total execution time: 0.0748
+ERROR - 2019-10-31 15:07:47 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:47 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:47 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:47 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:07:47 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:07:47 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:07:47 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:07:47 --> 404 Page Not Found: Static/plugins
+ERROR - 2019-10-31 15:11:21 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:11:21 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:11:21 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:11:21 --> 404 Page Not Found: admin/Faviconico/index
+ERROR - 2019-10-31 15:25:41 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-10-31 15:25:41 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 15:25:41 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 15:25:41 --> 404 Page Not Found: admin/Faviconico/index

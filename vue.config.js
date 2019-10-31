@@ -1,20 +1,20 @@
 module.exports = {
-  "publicPath": "admin",
-  "outputDir": "public/admin",
-  "pages": {
-    "index": {
-      "entry": "src/main.js",
-      "template": "src/index.html",
-      "filename": "index.html",
-      "title": "Index Page",
-      "chunks": [
-        "chunk-vendors",
-        "chunk-common",
-        "index"
+  'publicPath': 'admin',
+  'outputDir': 'public/admin',
+  'pages': {
+    'index': {
+      'entry': 'src/main.js',
+      'template': 'src/index.html',
+      'filename': 'index.html',
+      'title': 'Index Page',
+      'chunks': [
+        'chunk-vendors',
+        'chunk-common',
+        'index'
       ]
     }
   },
-  "transpileDependencies": [
-    "vuetify"
+  'transpileDependencies': [
+    'vuetify'
   ]
 }
