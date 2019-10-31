@@ -257,3 +257,11 @@ DEBUG - 2019-10-31 06:20:42 --> No URI present. Default controller set.
 DEBUG - 2019-10-31 06:20:42 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2019-10-31 06:20:42 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
 ERROR - 2019-10-31 06:20:42 --> Severity: error --> Exception: Call to undefined function mongo_connection() D:\laragon\www\airHub\application\controllers\Welcome.php 9
+ERROR - 2019-10-31 09:30:05 --> Could not find the specified $config['composer_autoload'] path: ./vendor/autoload.php
+DEBUG - 2019-10-31 09:30:05 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 09:30:05 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 09:30:05 --> 404 Page Not Found: admin/Sdfdsf/index
+ERROR - 2019-10-31 09:30:12 --> Could not find the specified $config['composer_autoload'] path: ./vendor/autoload.php
+DEBUG - 2019-10-31 09:30:12 --> UTF-8 Support Enabled
+DEBUG - 2019-10-31 09:30:12 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2019-10-31 09:30:12 --> 404 Page Not Found: admin/Sdfdsffdd/index

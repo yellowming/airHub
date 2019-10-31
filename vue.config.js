@@ -1,6 +1,6 @@
 module.exports = {
   "publicPath": "admin",
-  "outputDir": "html/admin",
+  "outputDir": "public/admin",
   "pages": {
     "index": {
       "entry": "src/main.js",
