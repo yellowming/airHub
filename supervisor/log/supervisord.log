@@ -1,4 +1,0 @@
-2019-09-07 14:54:31,014 CRIT Supervisor running as root (no user in config file)
-2019-09-07 14:54:31,015 INFO Included extra file "/home/i/airHub/supervisor/supervisor.conf" during parsing
-2019-09-07 14:54:31,033 CRIT Server 'unix_http_server' running without any HTTP authentication checking
-2019-09-07 14:54:31,034 INFO supervisord started with pid 4738
