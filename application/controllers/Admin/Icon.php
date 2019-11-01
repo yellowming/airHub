@@ -11,6 +11,6 @@ class Icon extends Admin_Controller {
 	{
         $this->load->helper('yml');
         $data = Spyc::YAMLLoad('./static/plugins/fontawesome-free-5.11.2-web/metadata/icons.yml');
-        $this->viewData['data']['icons'] = $data;
+        dump($data);
 	}
 }

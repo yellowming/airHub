@@ -1,5 +1,5 @@
 module.exports = {
-  'publicPath': 'admin',
+  'publicPath': process.env.NODE_ENV === 'production' ? 'admin' : '',
   'outputDir': 'public/admin',
   'pages': {
     'index': {
@@ -13,6 +13,9 @@ module.exports = {
         'index'
       ]
     }
+  },
+  devServer: {
+    proxy: 'http://airHub.test'
   },
   'transpileDependencies': [
     'vuetify'

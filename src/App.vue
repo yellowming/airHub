@@ -31,63 +31,7 @@
           <v-col cols="10">
             <v-card>
               <v-card-text>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <span>Scheme</span>
-                    <v-switch
-                      v-model="$vuetify.theme.dark"
-                      primary
-                      label="Dark"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <span>Drawer</span>
-                    <v-radio-group
-                      v-model="primaryDrawer.type"
-                      column
-                    >
-                      <v-radio
-                        v-for="drawer in drawers"
-                        :key="drawer"
-                        :label="drawer"
-                        :value="drawer.toLowerCase()"
-                        primary
-                      />
-                    </v-radio-group>
-                    <v-switch
-                      v-model="primaryDrawer.clipped"
-                      label="Clipped"
-                      primary
-                    />
-                    <v-switch
-                      v-model="primaryDrawer.floating"
-                      label="Floating"
-                      primary
-                    />
-                    <v-switch
-                      v-model="primaryDrawer.mini"
-                      label="Mini"
-                      primary
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <span>Footer</span>
-                    <v-switch
-                      v-model="footer.inset"
-                      label="Inset"
-                      primary
-                    />
-                  </v-col>
-                </v-row>
+                {{html}}
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
@@ -125,15 +69,13 @@ export default {
     },
     footer: {
       inset: true
-    }
+    },
+    html: ''
   }),
   mounted: function () {
-    this.axios.get('api/getData.php', { // 还可以直接把参数拼接在url后边
-      params: {
-        title: '眼镜'
-      }
-    }).then(function (res) {
-      this.goodsList = res.data
+    let _this = this
+    this.axios.get('/admin/icon').then(function (res) {
+      _this.html = res.data
     }).catch(function (error) {
       console.log(error)
     })
