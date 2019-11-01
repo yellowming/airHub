@@ -1,20 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+function route (path, file, name, children) {
+  return {
+    exact: true,
+    path,
+    name,
+    children,
+    component: (resovle) => import(`../views/${file}.vue`).then(resovle)
+  }
+}
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/About.vue')
-  }
+  route('/login', 'Login', 'login'),
+  route('/', 'Main', null, [
+    route('/', 'Home', 'home'),
+    route('/about', 'About')
+  ]),
+  route('*', '404', '404')
 ]
 
 const router = new VueRouter({

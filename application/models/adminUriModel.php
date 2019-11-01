@@ -8,13 +8,22 @@ class AdminUriModel extends CI_Model {
 	}
     
     public function getChildrenById($id = null){
+        $id = $id===null ? null : new MongoDB\BSON\ObjectId($id);
         $cursor = $this->collection->find(['parent_id'=>$id]);
+        return cursor2array($cursor);
+    }
+
+    public function getTree($id = null){
         $result = [];
-        foreach($cursor as $uri){
+        $uris = $this->getChildrenById($id);
+        foreach($uris as $uri){
+            $children = $this->getTree($uri['_id']);
+            if(!empty($children)) $uri['children'] = $this->getTree($uri['_id']);
             $result[] = $uri;
         }
         return $result;
     }
+
     public function getAll()
     {
         $cursor = $this->collection->find();

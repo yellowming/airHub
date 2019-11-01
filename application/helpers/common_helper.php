@@ -7,16 +7,19 @@ function dump($obj, $isEnd = false){
 }
 
 function cursor2array($el){
-    if(gettype($el) === 'array'){
-        $result = [];
-        foreach($el as $key=>$val) $result[$key] = cursor2array($val);
-        return $result;
+    $result = [];
+    if(gettype($el) === 'object' && is_a($el,'MongoDB\Driver\Cursor')){
+        foreach($el as $row){
+			foreach($row as $key=>$value){
+				if(is_a($value, 'MongoDB\BSON\ObjectId')){
+					$row[$key] = $value->__toString();
+				}elseif(is_a($value, 'MongoDate')){
+					$row[$key] = timeStamp2String($value->sec);
+				}
+			}
+			$result[] = $row;
+		}
     }
-    if(gettype($el) === 'object'){
-        if(is_a($el,'MongoDB\BSON\ObjectId')) return (string)$el;
-        if(is_a($el,'MongoDB\Driver\Cursor')) return $el->toArray();
-    }
-    
-    return $el;
+    return $result;
 }
 
