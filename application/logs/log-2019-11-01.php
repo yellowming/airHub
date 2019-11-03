@@ -1030,3 +1030,39 @@ DEBUG - 2019-11-01 09:21:16 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2019-11-01 09:21:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
 DEBUG - 2019-11-01 09:21:16 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
 DEBUG - 2019-11-01 09:21:16 --> Total execution time: 0.0370
+ERROR - 2019-11-01 13:01:37 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 13:01:38 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 13:01:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 13:01:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 13:01:38 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 13:01:38 --> Total execution time: 0.4836
+ERROR - 2019-11-01 13:02:26 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 13:02:26 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 13:02:26 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 13:02:26 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 13:02:26 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 13:02:26 --> Total execution time: 0.1464
+ERROR - 2019-11-01 13:02:30 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 13:02:30 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 13:02:30 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 13:02:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 13:02:30 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 13:02:30 --> Total execution time: 0.0789
+ERROR - 2019-11-01 13:04:28 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 13:04:28 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 13:04:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 13:04:28 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 13:04:28 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 13:04:28 --> Total execution time: 0.0847
+ERROR - 2019-11-01 13:13:31 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 13:13:31 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 13:13:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 13:13:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 13:13:31 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 13:13:31 --> Total execution time: 0.0872
+ERROR - 2019-11-01 16:42:57 --> Could not find the specified $config['composer_autoload'] path: /vendor/autoload.php
+DEBUG - 2019-11-01 16:42:57 --> UTF-8 Support Enabled
+DEBUG - 2019-11-01 16:42:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-01 16:42:57 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-01 16:42:57 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-01 16:42:57 --> Total execution time: 0.0879

@@ -15,6 +15,7 @@ class Admin_Controller extends MY_Controller
     {
         parent::__construct();
         $this->load->model(['adminUriModel','adminUserModel','adminRoleModel']);
+        $this->load->helper(['auth']);
     }
 
     

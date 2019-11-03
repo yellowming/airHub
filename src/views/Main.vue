@@ -66,10 +66,10 @@ export default {
           exact: true,
           path: uri.uri,
           name: uri._id,
-          children: uri.children ? _this.mergeRoute(uri.children) : null,
-          component: (resovle) => import(`../views/${uri.uri}.vue`).then(resovle)
+          component: (resovle) => import(`../views/Login.vue`).then(resovle)
         }
-        newRoute.push(route)
+        if (uri.children) newRoute.concat(_this.mergeRoute(uri.children))
+        if (uri.uri) newRoute.push(route)
       })
       return newRoute
     }
@@ -79,6 +79,7 @@ export default {
     this.axios.get('menu/getall').then(function (res) {
       _this.menuTree = res.data
       let newRoute = _this.mergeRoute(res.data)
+      console.log(newRoute)
       _this.$router.addRoutes(newRoute)
       console.log(_this.$router.options)
     }).catch(function (error) {
