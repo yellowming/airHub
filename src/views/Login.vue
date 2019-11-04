@@ -116,11 +116,13 @@ export default {
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
+        let _this = this
         this.axios.post('auth/login', {
           email: this.email,
           password: this.password
         }).then(function (response) {
-          console.log(response)
+          _this.$store.commit('setUserToken', response.data.token)
+          _this.$router.push({ name: 'Home' })
         }).catch(function (error) {
           console.log(error)
         })

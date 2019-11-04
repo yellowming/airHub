@@ -22,6 +22,11 @@
         @click.stop="primaryDrawer.mini = !primaryDrawer.mini"
       />
       <v-toolbar-title>Vuetify</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-btn icon @click.stop="logout">
+        <v-icon>mdi-exit-to-app</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>
@@ -72,6 +77,10 @@ export default {
         if (uri.uri) newRoute.push(route)
       })
       return newRoute
+    },
+    logout: function () {
+      this.$store.commit('setUserToken', '')
+      this.$router.push({ name: 'Login' })
     }
   },
   mounted: function () {
