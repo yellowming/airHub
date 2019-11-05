@@ -82,18 +82,6 @@ export default {
       this.$store.commit('setUserToken', '')
       this.$router.push({ name: 'Login' })
     }
-  },
-  mounted: function () {
-    let _this = this
-    this.axios.get('menu/getall').then(function (res) {
-      _this.menuTree = res.data
-      let newRoute = _this.mergeRoute(res.data)
-      console.log(newRoute)
-      _this.$router.addRoutes(newRoute)
-      console.log(_this.$router.options)
-    }).catch(function (error) {
-      console.log(error)
-    })
   }
 }
 </script>

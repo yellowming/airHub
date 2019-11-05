@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from '../plugins/axios'
+import axios from '../plugins/axiosBase'
 
 Vue.use(Vuex)
 
@@ -19,7 +19,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getUser ({ commit }) {
+    async getUser ({ commit }) {
       axios.get('auth/user')
         .then(response => {
           commit('setUser', response.data)

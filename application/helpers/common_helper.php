@@ -23,3 +23,18 @@ function cursor2array($el){
     return $result;
 }
 
+function MongoVal($el){
+    if(is_a($el, 'MongoDB\BSON\ObjectId')){
+        return $el->__toString();
+    }elseif(is_a($el, 'MongoDate')){
+        return timeStamp2String($el->sec);
+    }elseif(is_a($el,'MongoDB\Driver\Cursor') || gettype($el) === 'array'){
+        $result = [];
+        foreach($el as $key=>$value){
+            $result[$key] = MongoVal($value);
+        }
+        return $result;
+    }
+    return $el;
+}
+

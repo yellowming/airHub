@@ -121,9 +121,10 @@ export default {
           email: this.email,
           password: this.password
         }).then(function (response) {
+          _this.$axios.defaults.headers.common['Authorization'] = response.data.token
           _this.$store.commit('setUserToken', response.data.token)
-          _this.$router.push({ name: 'Home' })
-        }).catch(function (error) {
+          _this.$router.push({ path: '/' }).then(() => {}).catch(() => {})
+        }).catch((error) => {
           console.log(error)
         })
       }

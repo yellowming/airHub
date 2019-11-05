@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
+import axios from '../plugins/axiosBase'
 
 Vue.use(VueRouter)
 function route (path, file, name, children) {
@@ -33,10 +34,16 @@ router.beforeEach((to, from, next) => {
     return isLoginPage ? next() : next({ name: 'Login' })
   }
   if (!store.state.User) {
-    store.dispatch('getUser')
-    router.addRoutes(ansyRoutes)
-    router.replace(to)
+    axios.get('auth/user').then((re) => {
+      store.commit('setUser', { name: 'william' })
+      router.addRoutes(ansyRoutes)
+      next({ ...to, replace: true })
+    })
+  } else {
+    isLoginPage ? next({ path: '/' }) : next()
   }
-  isLoginPage ? next({ name: 'Home' }) : next()
+})
+router.onError((err) => {
+  console.log(err)
 })
 export default router
