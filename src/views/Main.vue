@@ -11,7 +11,7 @@
     >
       <v-list>
         <sider-menu :itemData="homeUri" />
-        <sider-menu v-for="menuItem in menuTree" :key="menuItem._id" :itemData="menuItem" />
+        <sider-menu v-for="menuItem in ansyRoutes" :key="menuItem._id" :itemData="menuItem" />
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -42,6 +42,7 @@
 
 <script>
 import SiderMenu from '../components/SiderMenu'
+import ansyRoutes from '../router/ansyRouters'
 export default {
   components: {
     SiderMenu
@@ -60,28 +61,16 @@ export default {
       name: '首页',
       icon: 'mdi-home'
     },
-    menuTree: []
+    ansyRoutes
   }),
   methods: {
-    mergeRoute: function (uris) {
-      let newRoute = []
-      let _this = this
-      uris.forEach(uri => {
-        let route = {
-          exact: true,
-          path: uri.uri,
-          name: uri._id,
-          component: (resovle) => import(`../views/Login.vue`).then(resovle)
-        }
-        if (uri.children) newRoute.concat(_this.mergeRoute(uri.children))
-        if (uri.uri) newRoute.push(route)
-      })
-      return newRoute
-    },
     logout: function () {
       this.$store.commit('setUserToken', '')
       this.$router.push({ name: 'Login' })
     }
+  },
+  mounted: () => {
+    console.log(ansyRoutes)
   }
 }
 </script>
