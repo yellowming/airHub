@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
-import ansyRoutes from './ansyRouters'
+import menuRoutes from './menuRouters'
 import axios from '../plugins/axiosBase'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: (resovle) => import('../views/Login.vue').then(resovle)
-  }
-]
+const routes = [{
+  path: '/login',
+  name: 'Login',
+  component: (resovle) => import('../views/Login.vue').then(resovle)
+}]
+const mainRoutes = [{
+  path: '/',
+  children: menuRoutes,
+  component: (resovle) => import('../views/Main.vue').then(resovle)
+}]
 
 const router = new VueRouter({
   base: process.env.BASE_URL,
@@ -25,11 +28,10 @@ router.beforeEach((to, from, next) => {
   }
   if (!store.state.User) {
     axios.get('auth/user').then((re) => {
-      store.commit('setUser', { name: 'william' })
-      router.addRoutes(ansyRoutes)
+      store.commit('setUser', re.data)
+      router.addRoutes(mainRoutes)
       next({ ...to, replace: true })
     }).catch((e) => {
-      console.log(e)
       store.commit('setUserToken', '')
       next({ name: 'Login' })
     })

@@ -8,31 +8,52 @@
       permanent
       app
       overflow
+      dark
     >
       <v-list>
-        <sider-menu :itemData="homeUri" />
-        <sider-menu v-for="menuItem in ansyRoutes" :key="menuItem._id" :itemData="menuItem" />
+        <template v-for="menuItem in menuRoutes">
+          <sider-menu v-if="menuItem.menu" :key="menuItem.name" :itemData="menuItem" />
+        </template>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="primaryDrawer.clipped"
+      color="#6A76AB"
+      shrink-on-scroll
+      fade-img-on-scroll
+      src="../assets/banner.jpg"
       app
+      dark
     >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(100,115,201,.5), rgba(25,32,72,.5)"
+        ></v-img>
+      </template>
       <v-app-bar-nav-icon
         @click.stop="primaryDrawer.mini = !primaryDrawer.mini"
       />
-      <v-toolbar-title>Vuetify</v-toolbar-title>
+      <v-toolbar-title>编辑</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-btn icon @click.stop="logout">
-        <v-icon>mdi-exit-to-app</v-icon>
+      <v-btn icon @click.stop="logout" disabled>
+        <v-avatar color="indigo" size="36">
+          <img
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            alt="John"
+          >
+        </v-avatar>
+      </v-btn>
+      fdwef
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
       <router-view></router-view>
     </v-content>
     <v-footer
-      inset
+      :inset="false"
       app
     >
       <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
@@ -42,7 +63,7 @@
 
 <script>
 import SiderMenu from '../components/SiderMenu'
-import ansyRoutes from '../router/ansyRouters'
+import menuRoutes from '../router/menuRouters'
 export default {
   components: {
     SiderMenu
@@ -52,16 +73,28 @@ export default {
     primaryDrawer: {
       model: null,
       type: 'default (no property)',
-      clipped: true,
+      clipped: false,
       floating: true,
       mini: false
     },
-    homeUri: {
-      uri: '/',
-      name: '首页',
-      icon: 'mdi-home'
-    },
-    ansyRoutes
+    menuRoutes,
+    items: [
+      {
+        text: 'Dashboard',
+        disabled: false,
+        href: 'breadcrumbs_dashboard'
+      },
+      {
+        text: 'Link 1',
+        disabled: false,
+        href: 'breadcrumbs_link_1'
+      },
+      {
+        text: 'Link 2',
+        disabled: true,
+        href: 'breadcrumbs_link_2'
+      }
+    ]
   }),
   methods: {
     logout: function () {
@@ -69,8 +102,8 @@ export default {
       this.$router.push({ name: 'Login' })
     }
   },
-  mounted: () => {
-    console.log(ansyRoutes)
+  mounted: function () {
+    console.log(this.$store.state)
   }
 }
 </script>
