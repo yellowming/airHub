@@ -1,5 +1,12 @@
 <template>
-  <div class="about">
-    <h1>404</h1>
-  </div>
+  <v-container>
+    <v-alert
+      text
+      prominent
+      type="error"
+      icon="mdi-cloud-alert"
+    >
+      404:页面没找到
+    </v-alert>
+  </v-container>
 </template>

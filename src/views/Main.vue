@@ -4,56 +4,46 @@
       v-model="primaryDrawer.model"
       :clipped="primaryDrawer.clipped"
       :floating="primaryDrawer.floating"
-      :mini-variant="primaryDrawer.mini"
-      permanent
+      :mini-variant.sync="primaryDrawer.mini"
       app
       overflow
       dark
     >
-      <v-list>
-        <template v-for="menuItem in menuRoutes">
-          <sider-menu v-if="menuItem.menu" :key="menuItem.name" :itemData="menuItem" />
-        </template>
-      </v-list>
+      <sider-menu/>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block @click.stop="logout">Logout</v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="primaryDrawer.clipped"
-      color="#6A76AB"
-      shrink-on-scroll
-      fade-img-on-scroll
-      src="../assets/banner.jpg"
+      color="teal"
       app
       dark
     >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(100,115,201,.5), rgba(25,32,72,.5)"
-        ></v-img>
-      </template>
       <v-app-bar-nav-icon
-        @click.stop="primaryDrawer.mini = !primaryDrawer.mini"
+        @click.stop="primaryDrawer.model = !primaryDrawer.model"
       />
-      <v-toolbar-title>编辑</v-toolbar-title>
+      <v-toolbar-title>FinTV</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="logout" disabled>
-        <v-avatar color="indigo" size="36">
-          <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-            alt="John"
-          >
-        </v-avatar>
-      </v-btn>
-      fdwef
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-toolbar-items v-if="$vuetify.breakpoint.smAndUp">
+        <v-btn text>导出</v-btn>
+        <v-btn text>删除</v-btn>
+        <v-btn text>新增</v-btn>
+        <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
     <v-content>
-      <router-view></router-view>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-content>
     <v-footer
-      :inset="false"
+      inset
       app
     >
       <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
@@ -63,7 +53,6 @@
 
 <script>
 import SiderMenu from '../components/SiderMenu'
-import menuRoutes from '../router/menuRouters'
 export default {
   components: {
     SiderMenu
@@ -73,11 +62,10 @@ export default {
     primaryDrawer: {
       model: null,
       type: 'default (no property)',
-      clipped: false,
+      clipped: true,
       floating: true,
       mini: false
     },
-    menuRoutes,
     items: [
       {
         text: 'Dashboard',
@@ -101,9 +89,6 @@ export default {
       this.$store.commit('setUserToken', '')
       this.$router.push({ name: 'Login' })
     }
-  },
-  mounted: function () {
-    console.log(this.$store.state)
   }
 }
 </script>

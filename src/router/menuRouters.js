@@ -31,6 +31,15 @@ const menuRoutes = [
     }]
   },
   {
+    path: 'user',
+    component: view('User/index'),
+    name: 'User',
+    menu: {
+      name: '用户',
+      icon: 'mdi-account-supervisor'
+    }
+  },
+  {
     path: '*',
     component: view('404')
   }
