@@ -1172,3 +1172,61 @@ DEBUG - 2019-11-08 09:59:51 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2019-11-08 09:59:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
 DEBUG - 2019-11-08 09:59:51 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
 DEBUG - 2019-11-08 09:59:51 --> Total execution time: 0.0340
+DEBUG - 2019-11-08 11:49:22 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:49:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:49:23 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:49:23 --> Total execution time: 0.4820
+DEBUG - 2019-11-08 11:49:45 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:49:45 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:49:45 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:49:45 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:49:45 --> Total execution time: 0.2828
+DEBUG - 2019-11-08 11:49:45 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:49:45 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:49:45 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:49:45 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:49:45 --> Total execution time: 0.0528
+DEBUG - 2019-11-08 11:50:08 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:50:08 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:50:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:50:08 --> Total execution time: 0.0560
+DEBUG - 2019-11-08 11:50:08 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:50:08 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:50:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:50:08 --> Total execution time: 0.0667
+DEBUG - 2019-11-08 11:58:36 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:36 --> Total execution time: 0.0385
+DEBUG - 2019-11-08 11:58:36 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:36 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:58:36 --> Total execution time: 0.1539
+DEBUG - 2019-11-08 11:58:36 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:36 --> Total execution time: 0.0352
+DEBUG - 2019-11-08 11:58:36 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:36 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:58:36 --> Total execution time: 0.0484
+DEBUG - 2019-11-08 11:58:42 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:42 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:42 --> Total execution time: 0.0375
+DEBUG - 2019-11-08 11:58:42 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:58:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:58:42 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:58:42 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:58:42 --> Total execution time: 0.0579
+DEBUG - 2019-11-08 11:59:00 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:59:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:59:00 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:59:00 --> Total execution time: 0.0372
+DEBUG - 2019-11-08 11:59:00 --> UTF-8 Support Enabled
+DEBUG - 2019-11-08 11:59:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-11-08 11:59:00 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-11-08 11:59:00 --> Config file loaded: F:\www\airHub\application\config/mongo.php
+DEBUG - 2019-11-08 11:59:00 --> Total execution time: 0.1613

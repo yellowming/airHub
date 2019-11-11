@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <v-data-table
       :headers="headers"
       :items="userList"
@@ -8,28 +8,45 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-
-      <template>
-        <v-text-field
-          append-icon="mdi-magnify"
-          label="搜索"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-btn icon color="light-blue">
-          <v-icon>mdi-export-variant</v-icon>
-        </v-btn>
-        <v-btn icon color="red">
-          <v-icon>mdi-delete-circle</v-icon>
-        </v-btn>
-        <v-btn icon color="indigo">
-          <v-icon>mdi-plus-circle</v-icon>
-        </v-btn>
+          <template>
+            <v-text-field
+              append-icon="mdi-magnify"
+              label="搜索"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-btn icon color="light-blue">
+              <v-icon>mdi-export-variant</v-icon>
+            </v-btn>
+            <v-btn icon color="indigo">
+              <v-icon>mdi-plus-circle</v-icon>
+            </v-btn>
+          </template>
+        </v-toolbar>
       </template>
-    </v-toolbar>
+
+      <template v-slot:item.action="{ item }">
+        <v-icon
+          color="indigo"
+          @click="deleteItem(item)"
+          class="mr-2"
+        >
+          mdi-circle-edit-outline
+        </v-icon>
+        <v-icon
+          color="red"
+          @click="editItem(item)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
+
+      <template v-slot:no-data>
+        没有数据，或者<v-btn color="primary" @click="getData">刷新</v-btn>
       </template>
     </v-data-table>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -45,7 +62,8 @@ export default {
           sortable: false,
           value: 'name'
         },
-        { text: '邮箱', value: 'email' }
+        { text: '邮箱', value: 'email' },
+        { text: '操作', value: 'action', sortable: false }
       ]
     }
   },
@@ -57,7 +75,11 @@ export default {
   methods: {
     setData (data) {
       this.userList = data.data.users
-      console.log(data)
+    },
+    getData () {
+      getUserList().then((data) => {
+        this.setData(data)
+      })
     }
   }
 }

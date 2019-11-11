@@ -9,10 +9,24 @@
       overflow
       dark
     >
-      <sider-menu/>
+      <v-list nav dense>
+        <v-list-item link @click.stop="alert(1)">
+          <v-list-item-avatar size="48">
+            <v-img src="http://airHub.test/assets/avatars/john.png"></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{$store.state.User.user.name}}</v-list-item-title>
+            <v-list-item-subtitle>{{$store.state.User.user.email}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+          <template v-for="menuItem in menuRoutes">
+            <menu-item v-if="menuItem.menu" :key="menuItem.name" :itemData="menuItem"/>
+          </template>
+      </v-list>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block @click.stop="logout">Logout</v-btn>
+          <v-btn block @click.stop="logout" ><v-icon left>mdi-exit-to-app</v-icon>退出账号</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -52,10 +66,11 @@
 </template>
 
 <script>
-import SiderMenu from '../components/SiderMenu'
+import MenuItem from '../components/MenuItem'
+import menuRoutes from '../router/menuRouters'
 export default {
   components: {
-    SiderMenu
+    MenuItem
   },
   data: () => ({
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
@@ -66,6 +81,7 @@ export default {
       floating: true,
       mini: false
     },
+    menuRoutes,
     items: [
       {
         text: 'Dashboard',
