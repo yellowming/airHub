@@ -22,7 +22,7 @@ class jwt{
     ->setAudience($this->aud) // Configures the audience (aud claim)
     ->setId((string)$user['_id'], true) // Configures the id (jti claim), replicating as a header item
     ->setIssuedAt(time()) // Configures the time that the token was issued (iat claim)
-    ->setExpiration(time() + 3600) // Configures the expiration time of the token (exp claim)
+    ->setExpiration(time() + 3600*24) // Configures the expiration time of the token (exp claim)
     ->sign($signer, $this->signer_key) // creates a signature using "testing" as key
     ->getToken(); // Retrieves the generated token
     $this->token = $token;

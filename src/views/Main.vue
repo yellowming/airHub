@@ -41,14 +41,10 @@
       />
       <v-toolbar-title>FinTV</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items v-if="$vuetify.breakpoint.smAndUp">
-        <v-btn text>导出</v-btn>
-        <v-btn text>删除</v-btn>
-        <v-btn text>新增</v-btn>
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </v-toolbar-items>
+      <v-toolbar-items v-if="$vuetify.breakpoint.smAndUp"></v-toolbar-items>
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
