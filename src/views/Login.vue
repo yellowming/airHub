@@ -55,7 +55,7 @@
                 <v-form
                   ref="form"
                   v-model="valid"
-                  :lazy-validation="lazy"
+                  lazy-validation
                 >
                   <v-text-field
                     v-model="email"
@@ -109,8 +109,7 @@ export default {
       'Item 3',
       'Item 4'
     ],
-    checkbox: false,
-    lazy: true
+    checkbox: false
   }),
 
   methods: {

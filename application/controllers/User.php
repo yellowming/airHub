@@ -6,13 +6,25 @@ class User extends Admin_Controller {
     {
         parent::__construct();
     }
-	public function index_get()
-	{
-        $users = $this->adminUserModel->collection->find();
+	public function index_get(){
+        $params = $this->input->get();
+        $where = [];
+        $count = $this->adminUserModel->collection->count($where);
+        $users = $this->adminUserModel->collection->find($where,[
+            'projection' => [
+                'name' => 1,
+                'avatar' => 1,
+                'email' => 1,
+                'roles' => 1
+            ],
+            'limit' => (int)$params['itemsPerPage'],
+            'skip' => ((int)$params['page']-1)*(int)$params['itemsPerPage'],
+            'sort' => [$params['mustSort'] => -1]
+        ]);
         $users = $users ? MongoVal($users) : [];
         $this->output
             ->set_content_type('application/json')
-            ->set_output(json_encode(['users'=>$users]));
+            ->set_output(json_encode(['users'=>$users, 'params'=>$params, 'count'=>$count]));
     }
     public function login()
 	{

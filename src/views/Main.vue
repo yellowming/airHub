@@ -11,9 +11,11 @@
     >
       <v-list nav dense>
         <v-list-item link @click.stop="alert(1)">
-          <v-list-item-avatar size="48">
-            <v-img src="http://airHub.test/assets/avatars/john.png"></v-img>
+          <v-list-item-avatar color="primary" size="48">
+            <img v-if="$store.state.User.user.avatar" :src="$store.state.User.user.avatar">
+            <span v-else class="white--text text-uppercase">{{ $store.state.User.user.name.substr(0, 1) }}</span>
           </v-list-item-avatar>
+
           <v-list-item-content>
             <v-list-item-title>{{$store.state.User.user.name}}</v-list-item-title>
             <v-list-item-subtitle>{{$store.state.User.user.email}}</v-list-item-subtitle>
