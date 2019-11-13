@@ -22,7 +22,7 @@ export function addOneUser (parameter) {
   return axios({
     url: api.user,
     method: 'post',
-    params: parameter
+    data: parameter
   })
 }
 export function updateOneUser (parameter) {

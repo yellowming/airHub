@@ -26,6 +26,65 @@ class User extends Admin_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode(['users'=>$users, 'params'=>$params, 'count'=>$count]));
     }
+
+    public function index_delete(){
+        $_id = $this->input->get('_id');
+        $deleteResult = $this->adminUserModel->collection->deleteOne(['_id'=>new MongoDB\BSON\ObjectId($_id)]);
+        if($deleteResult->getDeletedCount() === 1){
+            $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(204);
+        }else{
+            $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['message'=>'not found']))
+            ->set_status_header(404);
+        }
+    }
+
+    public function index_post(){
+        $params = json_decode($this->input->raw_input_stream, true);
+        $this->load->library('form_validation');
+        $this->form_validation->set_data($params);
+        $this->form_validation->set_rules('email', '邮箱', ['trim','required','valid_email',['is_unique',function($email){
+            $user = $this->adminUserModel->getOneByEmail($email);
+            return $user===null?true:false;
+        }]]);
+        $this->form_validation->set_rules('name', '用户名', ['trim','required','min_length[2]','max_length[12]',['is_unique',function($name){
+            $user = $this->adminUserModel->getOneByName($name);
+            return $user===null?true:false;
+        }]]);
+
+        $this->form_validation->set_rules('password', '密码', ['required','min_length[5]','max_length[20]']);
+
+        if($this->form_validation->run()){
+            $insert = [
+                'email' => trim($params['email']),
+                'name' => trim($params['name']),
+                'pwd' => password_hash($params['password'],PASSWORD_DEFAULT),
+                'roles' => $params['roles'],
+                'avatar' => null
+            ];
+            $insertResult = $this->adminUserModel->insert($insert);
+            if($insertResult->getInsertedCount()===0){
+                $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['message'=>'unknow error']))
+                ->set_status_header(500);
+            }else{
+                $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode(['message'=>'success']))
+                ->set_status_header(201);
+            } 
+        }else{
+            $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['message'=>'filed error','errors'=>$this->form_validation->error_array()]))
+            ->set_status_header(403);
+        }
+        
+    }
     public function login()
 	{
         $this->load->library('form_validation');

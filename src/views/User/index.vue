@@ -78,27 +78,33 @@
         </v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <input type="hidden" v-model="formData._id"/>
-            <v-text-field label="用户名" :rules="nameRules" v-model="formData.name"></v-text-field>
-            <v-text-field label="邮箱" :rules="emailRules" type="email" v-model="formData.email"></v-text-field>
-            <v-text-field label="密码" :rules="passwordRules" type="password" v-model="formData.password" persistent-hint :hint="action === 'edit' ? '填写则修改密码' : ''"></v-text-field>
-            <v-select
-              v-model="formData.roles"
-              :rules="rolesRules"
-              :items="roleList"
-              item-text="name"
-              item-value="_id"
-              attach
-              small-chips
-              label="角色"
-              multiple
-            ></v-select>
+            <input type="hidden" v-if="action !== 'add'" v-model="formData._id"/>
+            <template v-if="action !== 'delete'">
+              <v-text-field label="用户名" :rules="nameRules" v-model="formData.name"></v-text-field>
+              <v-text-field label="邮箱" :rules="emailRules" type="email" v-model="formData.email"></v-text-field>
+              <v-text-field label="密码" :rules="passwordRules" type="password" v-model="formData.password" persistent-hint :hint="action === 'edit' ? '填写则修改密码' : ''"></v-text-field>
+              <v-select
+                v-model="formData.roles"
+                :rules="rolesRules"
+                :items="roleList"
+                item-text="name"
+                item-value="_id"
+                attach
+                small-chips
+                label="角色"
+                multiple
+              ></v-select>
+            </template>
+            <p v-else class="error--text">确定删除用户-{{formData.name}}?</p>
           </v-form>
         </v-card-text>
+        <v-card-subtitle class="py-0" v-if="formError">
+          <v-alert type="error" dense class="mr-2">{{formError}}</v-alert>
+        </v-card-subtitle>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="gray" @click="dialogClose">取消</v-btn>
-          <v-btn color="success" @click="save">提交</v-btn>
+          <v-btn color="gray" :disabled="actionLoading" @click="dialogClose">取消</v-btn>
+          <v-btn color="success" :loading="actionLoading" :disabled="actionLoading" @click="save">提交</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -120,6 +126,7 @@ export default {
         { text: '操作', value: 'action', sortable: false }
       ],
       loading: false,
+      actionLoading: false,
       options: {},
       totalDesserts: 0,
       actions: {
@@ -136,6 +143,7 @@ export default {
         password: '',
         roles: []
       },
+      formError: '',
       valid: true,
       emailRules: [
         v => !!v || '邮箱不能为空',
@@ -177,7 +185,6 @@ export default {
       })
     },
     dialogClose () {
-      this.$refs.form.resetValidation()
       this.formData = {
         _id: '',
         name: '',
@@ -185,9 +192,17 @@ export default {
         password: '',
         roles: []
       }
+      this.formError = ''
       this.dialog = false
+      this.$refs.form.resetValidation()
     },
     addUser () {
+      this.formData = {
+        name: '',
+        email: '',
+        password: '',
+        roles: []
+      }
       this.action = 'add'
       this.dialog = true
     },
@@ -197,7 +212,9 @@ export default {
       this.dialog = true
     },
     deleteUser (item) {
-      console.log(item)
+      this.formData = item
+      this.action = 'delete'
+      this.dialog = true
     },
     array2Obj (array, key) {
       let obj = {}
@@ -207,16 +224,30 @@ export default {
       return obj
     },
     save () {
-      if (this.action === 'delete') {
-        deleteOneUser()
-      }
       if (this.$refs.form.validate()) {
-        if (this.action === 'add') {
-          addOneUser()
-        }else if (this.action === 'edit') {
-          updateOneUser()
+        this.actionLoading = true
+        if (this.action === 'delete') {
+          deleteOneUser({ _id: this.formData._id }).then((data) => {
+            this.actionLoading = false
+            this.dialogClose()
+            this.getData()
+          })
+        } else if (this.action === 'add') {
+          addOneUser(this.formData).then((data) => {
+            console.log(data)
+            this.actionLoading = false
+            this.dialogClose()
+            this.getData()
+          }).catch((err) => {
+            console.log(err)
+            this.formError = '错误'
+            this.actionLoading = false
+          })
+        } else if (this.action === 'edit') {
+          updateOneUser(this.formData).then((data) => {
+            console.log(data)
+          })
         }
-        console.log(this.formData)
       }
     }
   }

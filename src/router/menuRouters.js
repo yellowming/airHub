@@ -2,31 +2,36 @@ function view (file) {
   return (resovle) => import(`../views/${file}.vue`).then(resovle)
 }
 
+export const homeRoute = {
+  path: 'dashboard',
+  component: view('Home'),
+  name: 'Home',
+  meta: {
+    title: '首页',
+    icon: 'mdi-home',
+    menu: true
+  }
+}
+
 const menuRoutes = [
   { path: '', redirect: '/dashboard' },
-  {
-    path: 'dashboard',
-    component: view('Home'),
-    name: 'Home',
-    menu: {
-      name: '首页',
-      icon: 'mdi-home'
-    }
-  },
+  homeRoute,
   {
     path: 'system',
     component: view('About'),
-    menu: {
-      name: '系统设置',
-      icon: 'mdi-tools'
+    meta: {
+      title: '系统设置',
+      icon: 'mdi-tools',
+      menu: true
     },
     children: [{
       path: '',
       component: view('About'),
       name: 'About',
-      menu: {
-        name: '关于',
-        icon: 'mdi-android-messages'
+      meta: {
+        title: '关于',
+        icon: 'mdi-android-messages',
+        menu: true
       }
     }]
   },
@@ -34,9 +39,10 @@ const menuRoutes = [
     path: 'user',
     component: view('User/index'),
     name: 'User',
-    menu: {
-      name: '用户',
-      icon: 'mdi-account-supervisor'
+    meta: {
+      title: '用户',
+      icon: 'mdi-account-supervisor',
+      menu: true
     }
   },
   {

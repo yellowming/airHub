@@ -10,7 +10,7 @@
       dark
     >
       <v-list nav dense>
-        <v-list-item link @click.stop="alert(1)">
+        <v-list-item>
           <v-list-item-avatar color="primary" size="48">
             <img v-if="$store.state.User.user.avatar" :src="$store.state.User.user.avatar">
             <span v-else class="white--text text-uppercase">{{ $store.state.User.user.name.substr(0, 1) }}</span>
@@ -21,9 +21,9 @@
             <v-list-item-subtitle>{{$store.state.User.user.email}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-divider></v-divider>
+        <v-divider class="mb-1"></v-divider>
           <template v-for="menuItem in menuRoutes">
-            <menu-item v-if="menuItem.menu" :key="menuItem.name" :itemData="menuItem"/>
+            <menu-item v-if="menuItem.meta && menuItem.meta.menu" :key="menuItem.name" :itemData="menuItem"/>
           </template>
       </v-list>
       <template v-slot:append>
@@ -38,9 +38,7 @@
       app
       dark
     >
-      <v-app-bar-nav-icon
-        @click.stop="primaryDrawer.model = !primaryDrawer.model"
-      />
+      <v-app-bar-nav-icon  @click.stop="primaryDrawer.model = !primaryDrawer.model"/>
       <v-toolbar-title>FinTV</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$vuetify.breakpoint.smAndUp"></v-toolbar-items>
@@ -49,23 +47,23 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+      <v-breadcrumbs :items="breadList">
+        <template v-slot:item="props">
+          <v-breadcrumbs-item link :to="{path:props.item.path}">
+            {{ props.item.meta.title }}
+          </v-breadcrumbs-item>
+        </template>
+      </v-breadcrumbs>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer
-      inset
-      app
-    >
-      <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 import MenuItem from '../components/MenuItem'
-import menuRoutes from '../router/menuRouters'
+import menuRoutes, { homeRoute } from '../router/menuRouters'
 export default {
   components: {
     MenuItem
@@ -80,28 +78,31 @@ export default {
       mini: false
     },
     menuRoutes,
-    items: [
-      {
-        text: 'Dashboard',
-        disabled: false,
-        href: 'breadcrumbs_dashboard'
-      },
-      {
-        text: 'Link 1',
-        disabled: false,
-        href: 'breadcrumbs_link_1'
-      },
-      {
-        text: 'Link 2',
-        disabled: true,
-        href: 'breadcrumbs_link_2'
-      }
-    ]
+    breadList: []
   }),
   methods: {
     logout: function () {
       this.$store.commit('setUserToken', '')
       this.$router.push({ name: 'Login' })
+    },
+    getBreadcrumb () {
+      this.breadList = []
+      if (this.$route.name === homeRoute.name) return
+      this.breadList.push(homeRoute)
+      this.$route.matched.forEach(item => {
+        if (item.meta.title) this.breadList.push(item)
+      })
+    }
+  },
+  created () {
+    this.getBreadcrumb()
+  },
+  watch: {
+    $route: {
+      handler () {
+        this.getBreadcrumb()
+      },
+      deep: true
     }
   }
 }

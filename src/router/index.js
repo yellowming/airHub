@@ -39,6 +39,7 @@ router.beforeEach((to, from, next) => {
     isLoginPage ? next({ path: '/' }) : next()
   }
 })
+
 router.onError((err) => {
   console.log(err)
 })
