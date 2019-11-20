@@ -18,7 +18,7 @@ const menuRoutes = [
   homeRoute,
   {
     path: 'system',
-    component: view('About'),
+    component: view('Router'),
     meta: {
       title: '系统设置',
       icon: 'mdi-tools',
@@ -26,10 +26,10 @@ const menuRoutes = [
     },
     children: [{
       path: '',
-      component: view('About'),
-      name: 'About',
+      component: view('Role'),
+      name: 'Role',
       meta: {
-        title: '关于',
+        title: '角色管理',
         icon: 'mdi-android-messages',
         menu: true
       }

@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="text-center">
+    <img v-if="userAvatar" :src="userAvatar">
+    <button id="pick-avatar">Select an image</button>
+    <avatar-cropper
+      @uploaded="handleUploaded"
+      trigger="#pick-avatar"
+      upload-url="/files/upload" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import AvatarCropper from '../components/AvatarCropper'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  components: { AvatarCropper },
+  data () {
+    return {
+      userAvatar: undefined
+    }
+  },
+  methods: {
+    handleUploaded (resp) {
+      this.userAvatar = resp.relative_url
+    }
   }
 }
 </script>

@@ -40,7 +40,7 @@
         </v-toolbar>
       </template>
       <template v-slot:item.avatar="{ item }">
-        <v-avatar color="primary" tile size="36">
+        <v-avatar color="primary" size="36">
           <img v-if="item.avatar" :src="item.avatar">
           <span v-else class="white--text text-uppercase">{{ item.name.substr(0, 1) }}</span>
         </v-avatar>
@@ -99,7 +99,7 @@
           </v-form>
         </v-card-text>
         <v-card-subtitle class="py-0" v-if="formError">
-          <p class="error--text ma-0 px-2">{{formError}}</p>
+          <v-alert type="error" dense class="mr-2">{{formError}}</v-alert>
         </v-card-subtitle>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { getUserList, getRoleList, addOneUser, updateOneUser, deleteOneUser } from '../../plugins/api'
+import { getUserList, getRoleList, addOneUser, updateOneUser, deleteOneUser } from '../plugins/api'
 export default {
   data () {
     return {
@@ -145,14 +145,12 @@ export default {
       },
       formError: '',
       valid: true,
-      errors: {},
       emailRules: [
         v => !!v || '邮箱不能为空',
         v => /.+@.+\..+/.test(v) || '邮箱不合法'
       ],
       nameRules: [
-        v => !!v || '用户名不能为空',
-        v => !this.errors.name || this.errors.name
+        v => !!v || '用户名不能为空'
       ],
       passwordRules: [
         v => !!v || (this.action === 'edit') || '密码不能为空'
@@ -209,8 +207,7 @@ export default {
       this.dialog = true
     },
     editUser (item) {
-      let newData = item
-      this.formData = newData
+      this.formData = item
       this.action = 'edit'
       this.dialog = true
     },
@@ -248,17 +245,7 @@ export default {
           })
         } else if (this.action === 'edit') {
           updateOneUser(this.formData).then((data) => {
-            this.actionLoading = false
-            this.dialogClose()
-            this.getData()
-          }).catch((err) => {
-            if (err.response.data.errors) {
-              this.errors = err.response.data.errors
-              this.$refs.form.validate()
-            } else {
-              this.formError = '错误'
-            }
-            this.actionLoading = false
+            console.log(data)
           })
         }
       }

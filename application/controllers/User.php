@@ -85,6 +85,48 @@ class User extends Admin_Controller {
         }
         
     }
+    public function index_put(){
+        $input = $this->input->get();
+        if(!isset($input['_id'])) show_404();
+        try {$ObjectId = new MongoDB\BSON\ObjectId($input['_id']); } catch (\Throwable $th)  {show_404();}
+        $user = $this->adminUserModel->collection->findOne(['_id'=>$ObjectId]);
+        if(!$user) show_404();
+        $user = MongoVal($user);
+        $this->load->library('form_validation');
+        $this->form_validation->set_data($input);
+        $this->form_validation->set_rules('email', '邮箱', ['trim','required','valid_email',['is_unique',function($email) use ($user){
+            if($email === $user['email']) return true;
+            $user = $this->adminUserModel->getOneByEmail($email);
+            return $user===null?true:false;
+        }]]);
+        $this->form_validation->set_rules('name', '用户名', ['trim','required','min_length[2]','max_length[12]',['is_unique',function($name) use ($user){
+            if($name === $user['name']) return true;
+            $user = $this->adminUserModel->getOneByName($name);
+            return $user===null?true:false;
+        }]]);
+        $this->form_validation->set_rules('pwd', '密码', ['min_length[5]','max_length[20]']);
+        if($this->form_validation->run()){
+            $update = [];
+            if(isset($input['name'])) $update['name'] = $input['name'];
+            if(isset($input['email'])) $update['email'] = $input['email'];
+            if(isset($input['roles'])) $update['roles'] = $input['roles'];
+            if(isset($input['password'])) $update['pwd'] = password_hash($input['password'],PASSWORD_DEFAULT);
+            $updateResult = $this->adminUserModel->update(['_id' => $ObjectId],[ '$set' => $update]);
+            if($updateResult->getModifiedCount()===0 || $updateResult->getMatchedCount()===0){
+                $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['message'=>'filed error']))
+                ->set_status_header(403);
+            }else{
+                $this->output->set_content_type('application/json')
+                ->set_output(json_encode(['message'=>'ok']));
+            }
+        }else{
+            $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['message'=>'filed error','errors'=>$this->form_validation->error_array()]))
+            ->set_status_header(403);
+        }
+    }
     public function login()
 	{
         $this->load->library('form_validation');
