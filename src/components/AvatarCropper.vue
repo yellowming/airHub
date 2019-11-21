@@ -1,45 +1,28 @@
 <template>
-  <div class="avatar-cropper">
-    <div
-      class="avatar-cropper-overlay"
-      v-if="dataUrl"
-    >
-      <div class="avatar-cropper-mark">
-        <a
-          @click="destroy"
-          class="avatar-cropper-close"
-          href="javascript:;"
-        >&times;</a>
-      </div>
-      <div class="avatar-cropper-container">
-        <div class="avatar-cropper-image-container">
-          <img
+  <div>
+    <v-dialog v-model="dialog" max-width="600" max-height="600" persistent>
+      <v-card>
+        <img
             :src="dataUrl"
             @load.stop="createCropper"
             alt
             ref="img"
           >
-        </div>
-        <div class="avatar-cropper-footer">
-          <button
-            @click.stop.prevent="destroy"
-            class="avatar-cropper-btn"
-            v-text="labels.cancel"
-          >Cancel</button>
-          <button
-            @click.stop.prevent="submit"
-            class="avatar-cropper-btn"
-            v-text="labels.submit"
-          >Submit</button>
-        </div>
-      </div>
-    </div>
-    <input
-      :accept="mimes"
-      class="avatar-cropper-img-input"
-      ref="input"
-      type="file"
-    >
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="destroy">
+            取消
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="submit">
+            提交
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <input :accept="mimes" class="d-none" ref="input" type="file" />
   </div>
 </template>
 
@@ -63,9 +46,6 @@ export default {
       type: String,
       default: 'POST'
     },
-    uploadHeaders: {
-      type: Object
-    },
     uploadFormName: {
       type: String,
       default: 'file'
@@ -84,16 +64,14 @@ export default {
           autoCropArea: 1,
           viewMode: 1,
           movable: false,
-          zoomable: false
+          zoomable: true,
+          dialog: false,
+          resizable: true
         }
       }
     },
     outputOptions: {
       type: Object
-    },
-    outputMime: {
-      type: String,
-      default: null
     },
     outputQuality: {
       type: Number,
@@ -117,7 +95,9 @@ export default {
     return {
       cropper: undefined,
       dataUrl: undefined,
-      filename: undefined
+      filename: undefined,
+      outputMime: undefined,
+      dialog: false
     }
   },
   methods: {
@@ -125,6 +105,7 @@ export default {
       this.cropper.destroy()
       this.$refs.input.value = ''
       this.dataUrl = undefined
+      this.dialog = false
     },
     submit () {
       this.$emit('submit')
@@ -138,9 +119,8 @@ export default {
       this.destroy()
     },
     pickImage (e) {
+      console.log(e)
       this.$refs.input.click()
-      e.preventDefault()
-      e.stopPropagation()
     },
     createCropper () {
       this.cropper = new Cropper(this.$refs.img, this.cropperOptions)
@@ -149,41 +129,24 @@ export default {
       this.cropper.getCroppedCanvas(this.outputOptions).toBlob(
         blob => {
           let form = new FormData()
-          let xhr = new XMLHttpRequest()
           let data = Object.assign({}, this.uploadFormData)
-
           for (let key in data) {
             form.append(key, data[key])
           }
-
           form.append(this.uploadFormName, blob, this.filename)
-
-          this.$emit('uploading', form, xhr)
-
-          xhr.open(this.requestMethod, this.uploadUrl, true)
-
-          for (let header in this.uploadHeaders) {
-            xhr.setRequestHeader(header, this.uploadHeaders[header])
-          }
-
-          xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-              let response = ''
-              try {
-                response = JSON.parse(xhr.responseText)
-              } catch (err) {
-                response = xhr.responseText
-              }
-              this.$emit('completed', response, form, xhr)
-
-              if ([200, 201, 204].indexOf(xhr.status) > -1) {
-                this.$emit('uploaded', response, form, xhr)
-              } else {
-                this.$emit('error', 'Image upload fail.', 'upload', xhr)
-              }
+          return this.$axios({
+            url: this.uploadUrl,
+            method: 'post',
+            data: form,
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: progressEvent => {
+              this.$emit('uploading', progressEvent)
             }
-          }
-          xhr.send(form)
+          }).then(response => {
+            this.$emit('uploaded', response)
+          })
         },
         this.outputMime,
         this.outputQuality
@@ -209,90 +172,15 @@ export default {
         let reader = new FileReader()
         reader.onload = e => {
           this.dataUrl = e.target.result
+          this.dialog = true
         }
 
         reader.readAsDataURL(fileInput.files[0])
-
-        this.filename = fileInput.files[0].name || 'unknown'
-        this.mimeType = this.mimeType || fileInput.files[0].type
+        this.filename = fileInput.files[0].name
+        this.outputMime = fileInput.files[0].type
         this.$emit('changed', fileInput.files[0], reader)
       }
     })
   }
 }
 </script>
-
-<style lang="scss">
-.avatar-cropper {
-  .avatar-cropper-overlay {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99999;
-  }
-
-  .avatar-cropper-img-input {
-    display: none;
-  }
-
-  .avatar-cropper-close {
-    float: right;
-    padding: 20px;
-    font-size: 3rem;
-    color: #fff;
-    font-weight: 100;
-    text-shadow: 0px 1px rgba(40, 40, 40, 0.3);
-  }
-
-  .avatar-cropper-mark {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .avatar-cropper-container {
-    background: #fff;
-    z-index: 999;
-    box-shadow: 1px 1px 5px rgba(100, 100, 100, 0.14);
-
-    .avatar-cropper-image-container {
-      position: relative;
-      max-width: 400px;
-      height: 300px;
-    }
-    img {
-      max-width: 100%;
-      height: 100%;
-    }
-
-    .avatar-cropper-footer {
-      display: flex;
-      align-items: stretch;
-      align-content: stretch;
-      justify-content: space-between;
-
-      .avatar-cropper-btn {
-        width: 50%;
-        padding: 15px 0;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-        outline: none;
-        &:hover {
-          background-color: #2aabd2;
-          color: #fff;
-        }
-      }
-    }
-  }
-}
-</style>
