@@ -9,17 +9,29 @@
       <img v-if="userAvatar" :src="userAvatar">
       <v-icon v-else dark>mdi-account-circle</v-icon>
     </v-avatar>
+    <vueCropper
+      ref="cropper"
+      :img="option.img"
+      :outputSize="option.size"
+      :outputType="option.outputType"
+    ></vueCropper>
   </div>
 </template>
 
 <script>
 import AvatarCropper from '../components/AvatarCropper'
-
+import { VueCropper } from 'vue-cropper'
+import img from '@/assets/banner.jpg'
 export default {
-  components: { AvatarCropper },
+  components: { AvatarCropper, VueCropper },
   data () {
     return {
-      userAvatar: undefined
+      userAvatar: undefined,
+      option: {
+        img: img,
+        size: 1,
+        outputType: 'png'
+      }
     }
   },
   methods: {

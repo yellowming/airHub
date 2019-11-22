@@ -5,10 +5,10 @@ class Upload extends Admin_Controller {
 	public function index_post(){
     $config = [
       'upload_path' => './storage/',
-      'max_size' => 100,
-      'max_width' => 800,
-      'max_height' => 800,
-      'file_name' => new MongoDB\BSON\ObjectId().'png',
+      'max_size' => 10000,
+      'max_width' => 8800,
+      'max_height' => 8800,
+      'file_name' => new MongoDB\BSON\ObjectId().'.png',
       'allowed_types' => 'gif|jpg|jpeg|png|bmp|ico'
     ];
     $this->load->library('upload', $config);
