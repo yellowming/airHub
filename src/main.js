@@ -6,6 +6,11 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 
+import moment from 'moment'
+Vue.filter('dateformat', function (dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dataStr).format(pattern)
+})
+
 Vue.config.productionTip = false
 new Vue({
   vuetify,

@@ -22,6 +22,7 @@ class Admin_Controller extends MY_Controller
         if($input_method === 'options'){
             return $this->setJwtHeader();
         }
+        $this->setJwtHeader();
         $method = $method.'_'.$input_method;
         if (method_exists($this, $method)){
             $this->setJwtHeader();

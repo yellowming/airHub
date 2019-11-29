@@ -4,13 +4,28 @@ function view (file) {
 
 export const homeRoute = {
   path: 'dashboard',
-  component: view('Home'),
-  name: 'Home',
+  component: view('Dashboard/index'),
+  name: 'Dashboard',
   meta: {
     title: '首页',
     icon: 'mdi-home',
     menu: true
   }
+}
+
+export const profileRoute = {
+  path: 'profile',
+  component: view('Dashboard/index'),
+  children: [
+    {
+      path: '',
+      component: view('Profile/BaseInfo'),
+      name: 'Profile-Base',
+      meta: {
+        title: '基本信息'
+      }
+    }
+  ]
 }
 
 const menuRoutes = [
@@ -19,13 +34,14 @@ const menuRoutes = [
   {
     path: 'system',
     component: view('Router'),
+    redirect: 'system/role',
     meta: {
       title: '系统设置',
       icon: 'mdi-tools',
       menu: true
     },
     children: [{
-      path: '',
+      path: 'role',
       component: view('Role'),
       name: 'Role',
       meta: {
@@ -43,6 +59,26 @@ const menuRoutes = [
       title: '用户',
       icon: 'mdi-account-supervisor',
       menu: true
+    }
+  },
+  {
+    path: 'videos',
+    component: view('Video/index'),
+    name: 'VideoList',
+    meta: {
+      title: '视频列表',
+      icon: 'mdi-library-video',
+      menu: true
+    }
+  },
+  profileRoute,
+  {
+    path: 'profile',
+    component: view('Profile/index'),
+    meta: {
+      title: '个人中心',
+      icon: 'mdi-tools',
+      menu: false
     }
   },
   {

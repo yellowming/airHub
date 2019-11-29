@@ -40,7 +40,7 @@
         </v-toolbar>
       </template>
       <template v-slot:item.avatar="{ item }">
-        <v-avatar color="primary" tile size="36">
+        <v-avatar color="primary" size="36">
           <img v-if="item.avatar" :src="item.avatar">
           <span v-else class="white--text text-uppercase">{{ item.name.substr(0, 1) }}</span>
         </v-avatar>

@@ -6,11 +6,18 @@ const api = {
   service: '/service',
   permission: '/permission',
   permissionNoPager: '/permission/no-pager',
-  orgTree: '/org/tree'
+  video: '/video'
 }
 
 export default api
 
+export function getVideoList (parameter) {
+  return axios({
+    url: api.video,
+    method: 'get',
+    params: parameter
+  })
+}
 export function getUserList (parameter) {
   return axios({
     url: api.user,

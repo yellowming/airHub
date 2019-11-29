@@ -1,5 +1,24 @@
 <template>
   <div>
+    <v-row>
+    <v-col cols="12" sm="12" md="6" >
+      <v-card color="grey lighten-4" flat height="200px">
+        <v-toolbar color="elevation-0">
+          <v-toolbar-title>操作记录</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </v-toolbar>
+      </v-card>
+    </v-col>
+  </v-row>
     <avatar-cropper ref="avatarPicker" @submit="avatarUpload" />
     <v-avatar color="primary" size="64" class="ma-2" @click="pickAvatar">
       <img v-if="userAvatar" :src="userAvatar">
@@ -9,7 +28,7 @@
 </template>
 
 <script>
-import AvatarCropper from '../components/AvatarCropper'
+import AvatarCropper from '@/components/AvatarCropper'
 export default {
   components: { AvatarCropper },
   data () {
