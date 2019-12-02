@@ -147,7 +147,7 @@ export default {
       this.$router.push({ name: 'Login' })
     },
     toProfile () {
-      if (this.$route.name !== 'Profile-Base') this.$router.push({ name: 'Profile-Base' })
+      if (this.$route.name !== 'Profile-Base') this.$router.push({ name: 'Profile' })
     },
     getBreadcrumb () {
       this.breadList = []

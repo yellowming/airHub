@@ -9,7 +9,7 @@ class Upload extends Admin_Controller {
       'max_width' => 8800,
       'max_height' => 8800,
       'file_name' => new MongoDB\BSON\ObjectId().'.png',
-      'allowed_types' => 'gif|jpg|jpeg|png|bmp|ico'
+      'allowed_types' => 'png'
     ];
     $this->load->library('upload', $config);
     if (!$this->upload->do_upload('file')){

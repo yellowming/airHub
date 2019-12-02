@@ -15,17 +15,11 @@ export const homeRoute = {
 
 export const profileRoute = {
   path: 'profile',
-  component: view('Dashboard/index'),
-  children: [
-    {
-      path: '',
-      component: view('Profile/BaseInfo'),
-      name: 'Profile-Base',
-      meta: {
-        title: '基本信息'
-      }
-    }
-  ]
+  component: view('Profile/index'),
+  name: 'Profile',
+  meta: {
+    title: '个人中心'
+  }
 }
 
 const menuRoutes = [

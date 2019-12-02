@@ -40,7 +40,7 @@ class Auth extends Admin_Controller {
         }
         $user = MongoVal($userCursor);
         unset($user['pwd']);
-        $rolesCursor = $this->adminRoleModel->collection->find(['_id'=>['$in'=>$userCursor['roles']]]);
+        $rolesCursor = $this->adminRoleModel->collection->find(['_id'=>['$in'=>array_map('toMongoID',$user['roles'])]]);
         $roles = MongoVal($rolesCursor);
         $accessUris = [];
         foreach($roles as $role){
