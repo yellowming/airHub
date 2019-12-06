@@ -8,14 +8,18 @@ class Video extends Admin_Controller {
         $this->load->model('videoModel');
     }
 	public function index_get(){
-    $videos = $this->videoModel->collection->find(['status'=>'APPROVED'],
-    [
-        'limit' => 20,
-        'sort' => ['_id' => -1]
+    $params = $this->input->get();
+    $where = ['status'=>'APPROVED'];
+    $count = $this->videoModel->collection->count($where);
+    $videos = $this->videoModel->collection->find($where,[
+        'limit' => (int)$params['itemsPerPage'],
+        'skip' => ((int)$params['page']-1)*(int)$params['itemsPerPage'],
+        'sort' => [$params['mustSort'] => -1,"_id" => -1]
     ]);
-    
+
+    $videos = $videos ? MongoVal($videos) : [];
     $this->output
         ->set_content_type('application/json')
-        ->set_output(json_encode(['videos'=>MongoVal($videos)]));
+        ->set_output(json_encode(['videos'=>$videos, 'params'=>$params, 'count'=>$count]));
   }
 }

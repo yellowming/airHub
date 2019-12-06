@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     UserToken: localStorage.getItem('user_token'),
-    User: null
+    User: null,
+    isDark: localStorage.getItem('isDark') === 'true'
   },
   mutations: {
     setUserToken (state, token) {
@@ -16,6 +17,10 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.User = user
+    },
+    setDark (state, isDark) {
+      localStorage.setItem('isDark', isDark)
+      state.isDark = isDark
     }
   },
   actions: {

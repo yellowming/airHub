@@ -2,11 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends Admin_Controller {
-    function __construct()
-    {
+    function __construct(){
         parent::__construct();
     }
-	public function index_get(){
+	public function many_get(){
         $params = $this->input->get();
         $where = [];
         $count = $this->adminUserModel->collection->count($where);
@@ -27,7 +26,7 @@ class User extends Admin_Controller {
             ->set_output(json_encode(['users'=>$users, 'params'=>$params, 'count'=>$count]));
     }
 
-    public function index_delete(){
+    public function one_delete($_id){
         $_id = $this->input->get('_id');
         $deleteResult = $this->adminUserModel->collection->deleteOne(['_id'=>new MongoDB\BSON\ObjectId($_id)]);
         if($deleteResult->getDeletedCount() === 1){
@@ -42,7 +41,7 @@ class User extends Admin_Controller {
         }
     }
 
-    public function index_post(){
+    public function one_post($_id){
         $params = json_decode($this->input->raw_input_stream, true);
         $this->load->library('form_validation');
         $this->form_validation->set_data($params);
@@ -85,7 +84,7 @@ class User extends Admin_Controller {
         }
         
     }
-    public function index_put(){
+    public function one_put($_id){
         $input = $this->input->get();
         if(!isset($input['_id'])) show_404();
         try {$ObjectId = new MongoDB\BSON\ObjectId($input['_id']); } catch (\Throwable $th)  {show_404();}

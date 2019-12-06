@@ -3,8 +3,10 @@
     <v-data-table
       :headers="tableHeaders"
       :items="videos"
-      :items-per-page="20"
+      :items-per-page="15"
       :loading="tableLoading"
+      :options.sync="options"
+      :server-items-length="totalDesserts"
     >
       <template v-slot:item.create_time="{ item }">
         {{dateFormat(item.create_time)}}
@@ -43,7 +45,7 @@
           </p>
           <video :src="preViewVideo.mp4_url" :poster="getimg(preViewVideo)" controls width="100%" autoplay></video>
           <p></p>
-          <p class="grey--text text--darken-4 subtitle-1">{{preViewVideo.body_zhcn}}</p>
+          <p class="subtitle-1">{{preViewVideo.body_zhcn}}</p>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -66,19 +68,29 @@ export default {
       { text: '撰稿人', value: 'create_user_name' },
       { text: '操作', value: 'action', sortable: false }
     ],
-    dialog: false
+    dialog: false,
+    totalDesserts: 0,
+    options: {}
   }),
-  mounted () {
-    let _this = this
-    this.tableLoading = true
-    getVideoList().then(res => {
-      _this.tableLoading = false
-      this.videos = res.data.videos
-    })
+  watch: {
+    options: {
+      handler () {
+        this.getData()
+      },
+      deep: true
+    }
   },
   methods: {
     dateFormat (time) {
       return moment(time).fromNow()
+    },
+    getData () {
+      this.tableLoading = true
+      getVideoList(this.options).then(res => {
+        this.tableLoading = false
+        this.totalDesserts = res.data.count
+        this.videos = res.data.videos
+      })
     },
     moment,
     getimg (video) {

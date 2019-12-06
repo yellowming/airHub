@@ -1,17 +1,16 @@
 <template>
-  <v-app id="sandbox" v-resize="onResize">
+  <v-app v-resize="onResize">
     <v-navigation-drawer
       v-model="primaryDrawer.model"
       :clipped="primaryDrawer.clipped"
-      :floating="primaryDrawer.floating"
+      floating
       :mini-variant.sync="primaryDrawer.mini"
       app
       overflow
-      dark
     >
       <v-list nav dense>
         <template v-for="menuItem in menuRoutes">
-          <menu-item v-if="menuItem.meta && menuItem.meta.menu" :key="menuItem.name" :itemData="menuItem"/>
+          <menu-item v-if="menuItem.meta && !menuItem.meta.hideMenu" :key="menuItem.name" :itemData="menuItem"/>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -22,7 +21,7 @@
       dark
     >
       <v-app-bar-nav-icon  @click.stop="primaryDrawer.model = !primaryDrawer.model"/>
-      <v-toolbar-title>FinTV</v-toolbar-title>
+      <v-toolbar-title><router-link to="/"><v-img :src="logo" height="50" width="120" /></router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="handleFullScreen">
         <v-icon v-if="fullscreen">mdi-fullscreen-exit</v-icon>
@@ -46,6 +45,7 @@
           open-on-click
           allow-overflow
           right
+          :close-on-content-click="false"
         >
       <template v-slot:activator="{ on }">
         <v-btn text v-on="on">
@@ -80,9 +80,9 @@
           <v-divider></v-divider>
 
           <v-list-item>
-            <v-list-item-title>Enable messages</v-list-item-title>
+            <v-list-item-title>黑暗模式</v-list-item-title>
             <v-list-item-action>
-              <v-switch color="purple"></v-switch>
+              <v-switch v-model="$vuetify.theme.isDark" @change="darkToogle" color="purple"></v-switch>
             </v-list-item-action>
           </v-list-item>
 
@@ -93,6 +93,19 @@
             </v-list-item-action>
           </v-list-item>
 
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-select
+                v-model="e1"
+                :items="states"
+                menu-props="auto"
+                label="语言"
+                hide-details
+              ></v-select>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-divider></v-divider>
 
           <v-list-item @click.stop="logout">
@@ -122,24 +135,30 @@
 <script>
 import MenuItem from '@/components/MenuItem'
 import menuRoutes, { homeRoute } from '@/router/menuRouters'
+import logo from '@/assets/logo.png'
 export default {
   components: {
     MenuItem
   },
   data: () => ({
     homeRoute,
+    logo,
     navUserMenu: false,
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
     primaryDrawer: {
       model: null,
       type: 'default (no property)',
       clipped: true,
-      floating: true,
       mini: false
     },
     menuRoutes,
     breadList: [],
-    fullscreen: false
+    fullscreen: false,
+    states: [
+      '简体',
+      '繁体'
+    ],
+    e1: '简体'
   }),
   methods: {
     logout () {
@@ -147,9 +166,13 @@ export default {
       this.$router.push({ name: 'Login' })
     },
     toProfile () {
-      if (this.$route.name !== 'Profile-Base') this.$router.push({ name: 'Profile' })
+      if (this.$route.name !== 'Profile') this.$router.push({ name: 'Profile' })
+    },
+    darkToogle () {
+      this.$store.commit('setDark', this.$vuetify.theme.isDark)
     },
     getBreadcrumb () {
+      console.log(this)
       this.breadList = []
       if (!this.$route.name) return
       if (this.$route.name === homeRoute.name) return

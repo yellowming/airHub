@@ -1,18 +1,18 @@
 <template>
-  <v-list-item v-if="!itemData.children" link :to="{name:itemData.name}">
+  <v-list-group v-if="itemData.children && !itemData.meta.hideChildren" :prepend-icon="itemData.meta.icon" :sub-group="subGroup">
+    <template v-slot:activator>
+      <v-list-item-content><v-list-item-title>{{itemData.meta.title}}</v-list-item-title></v-list-item-content>
+    </template>
+    <template v-for="item in itemData.children">
+      <menu-item v-if="item.meta && !item.meta.hideMenu" :key="item.name" :itemData="item" subGroup/>
+    </template>
+  </v-list-group>
+  <v-list-item v-else link :to="itemData">
     <v-list-item-icon>
       <v-icon v-text="itemData.meta.icon"></v-icon>
     </v-list-item-icon>
     <v-list-item-content><v-list-item-title>{{ itemData.meta.title }}</v-list-item-title></v-list-item-content>
   </v-list-item>
-  <v-list-group v-else :prepend-icon="itemData.meta.icon" :sub-group="subGroup">
-    <template v-slot:activator>
-      <v-list-item-content><v-list-item-title>{{itemData.meta.title}}</v-list-item-title></v-list-item-content>
-    </template>
-    <template v-for="item in itemData.children">
-      <menu-item v-if="item.meta && item.meta.menu" :key="item.name" :itemData="item" subGroup/>
-    </template>
-  </v-list-group>
 </template>
 
 <script>
