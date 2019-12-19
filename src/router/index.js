@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import menuRoutes from './menuRouters'
-import axios from '../plugins/axiosBase'
+import { getProfile } from '@/plugins/api'
 
 Vue.use(VueRouter)
 
@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
     return isLoginPage ? next() : next({ name: 'Login' })
   }
   if (!store.state.User) {
-    axios.get('auth/user').then((re) => {
+    getProfile().then((re) => {
       store.commit('setUser', re.data)
       router.addRoutes(mainRoutes)
       next({ ...to, replace: true })

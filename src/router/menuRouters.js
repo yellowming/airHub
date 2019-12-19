@@ -37,15 +37,44 @@ const menuRoutes = [
       title: '系统设置',
       icon: 'mdi-tools'
     },
-    children: [{
-      path: '',
-      component: view('Role'),
-      name: 'Role',
-      meta: {
-        title: '角色管理',
-        icon: 'mdi-android-messages'
+    children: [
+      {
+        path: '/system/role',
+        component: view('Router'),
+        meta: {
+          title: '角色管理',
+          icon: 'mdi-android-messages',
+          hideChildren: true
+        },
+        children: [
+          {
+            path: 'edit/:id',
+            component: view('Role/form'),
+            name: 'Role-edit',
+            meta: {
+              title: '修改'
+            }
+          },
+          {
+            path: '',
+            component: view('Role/index'),
+            name: 'Role-list',
+            meta: {
+              title: '列表'
+            }
+          }
+        ]
+      },
+      {
+        path: 'groups',
+        component: view('Group/index'),
+        name: 'Group',
+        meta: {
+          title: '分组管理',
+          icon: 'mdi-filter-variant'
+        }
       }
-    }]
+    ]
   },
   {
     path: '/user',
@@ -76,10 +105,26 @@ const menuRoutes = [
     children: [
       {
         path: '',
-        name: 'ApiList',
+        name: 'API_LIST',
         component: view('Api/index'),
         meta: {
           title: '列表'
+        }
+      },
+      {
+        path: 'add',
+        name: 'API_ADD',
+        component: view('Api/form'),
+        meta: {
+          title: '新增'
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'API_EDIT',
+        component: view('Api/form'),
+        meta: {
+          title: '编辑'
         }
       }
     ]

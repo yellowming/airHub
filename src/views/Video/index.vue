@@ -45,7 +45,7 @@
           </p>
           <video :src="preViewVideo.mp4_url" :poster="getimg(preViewVideo)" controls width="100%" autoplay></video>
           <p></p>
-          <p class="subtitle-1">{{preViewVideo.body_zhcn}}</p>
+          <p class="text--primary">{{preViewVideo.body_zhcn}}</p>
         </v-card-text>
       </v-card>
     </v-dialog>

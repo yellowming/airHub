@@ -1,17 +1,26 @@
 import axios from './axiosBase'
 
 const api = {
-  users: '/user/many',
+  profile: '/auth/profile',
+  users: '/user',
   user: '/user/one',
   role: '/role',
   service: '/service',
   permission: '/permission',
   permissionNoPager: '/permission/no-pager',
   video: '/video',
-  api: '/api/apilist'
+  api: '/api/api'
 }
 
 export default api
+
+export function getProfile (parameter) {
+  return axios({
+    url: api.profile,
+    method: 'get',
+    params: parameter
+  })
+}
 
 export function getVideoList (parameter) {
   return axios({
@@ -27,28 +36,28 @@ export function getUserList (parameter) {
     params: parameter
   })
 }
-export function addOneUser (parameter, _id) {
+export function addOneUser (parameter) {
   return axios({
-    url: api.user + '/' + _id,
+    url: api.user,
     method: 'post',
     data: parameter
   })
 }
-export function updateOneUser (parameter, _id) {
+export function updateOneUser (parameter) {
   return axios({
-    url: api.user + '/' + _id,
+    url: api.user,
     method: 'put',
     params: parameter
   })
 }
-export function deleteOneUser (parameter, _id) {
+export function deleteOneUser (parameter) {
   return axios({
-    url: api.user + '/' + _id,
+    url: api.user,
     method: 'delete',
     params: parameter
   })
 }
-export function getRoleList (parameter) {
+export function getRole (parameter) {
   return axios({
     url: api.role,
     method: 'get',
@@ -56,10 +65,33 @@ export function getRoleList (parameter) {
   })
 }
 
-export function getApiList (parameter) {
+export function updateRole (parameter) {
+  return axios({
+    url: api.role,
+    method: 'put',
+    params: parameter
+  })
+}
+export function getApi (parameter) {
   return axios({
     url: api.api,
     method: 'get',
     params: parameter
+  })
+}
+
+export function getApiGroup (parameter) {
+  return axios({
+    url: 'api/api/category',
+    method: 'get',
+    params: parameter
+  })
+}
+
+export function addApi (parameter) {
+  return axios({
+    url: 'api/api',
+    method: 'post',
+    data: parameter
   })
 }

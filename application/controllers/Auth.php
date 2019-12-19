@@ -28,30 +28,9 @@ class Auth extends Admin_Controller {
             ->set_output(json_encode(['token'=>$token]));
     }
     
-    public function user_get(){
-        $token = $this->jwt->token;
-        $user_id = $token->getHeader('jti');
-        $userCursor = $this->adminUserModel->collection->findOne(['_id'=>new MongoDB\BSON\ObjectId($user_id)]);
-        if(!$userCursor){
-            return $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode(['message'=>'user has been deleted']))
-            ->set_status_header(400);
-        }
-        $user = MongoVal($userCursor);
-        unset($user['pwd']);
-        $rolesCursor = $this->adminRoleModel->collection->find(['_id'=>['$in'=>array_map('toMongoID',$user['roles'])]]);
-        $roles = MongoVal($rolesCursor);
-        $accessUris = [];
-        foreach($roles as $role){
-            $accessUris = array_unique(array_merge($accessUris, $role['access_uri']));
-        }
-        foreach($accessUris as &$uriID){
-            $uriID = new MongoDB\BSON\ObjectId($uriID);
-        }
-        $accessCursor = $this->adminUriModel->collection->find(['_id'=>['$in'=>$accessUris]]);
+    public function profile_get(){
         $this->output
             ->set_content_type('application/json')
-            ->set_output(json_encode(['user'=>$user,'roles'=>$roles,'access'=>MongoVal($accessCursor)]));
+            ->set_output(json_encode(['user'=>$this->user,'roles'=>$this->roles,'access'=>$this->permissionApis]));
     }
 }

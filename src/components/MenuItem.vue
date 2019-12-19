@@ -1,5 +1,5 @@
 <template>
-  <v-list-group v-if="itemData.children && !itemData.meta.hideChildren" :prepend-icon="itemData.meta.icon" :sub-group="subGroup">
+  <v-list-group v-if="itemData.children && !itemData.meta.hideChildren" :prepend-icon="itemData.meta.icon" class="menu_sub" :sub-group="subGroup">
     <template v-slot:activator>
       <v-list-item-content><v-list-item-title>{{itemData.meta.title}}</v-list-item-title></v-list-item-content>
     </template>
@@ -30,3 +30,9 @@ export default {
   }
 }
 </script>
+<style>
+  .menu_sub>.v-list-group__items{
+    padding-left: 20px;
+    padding-bottom: 4px;
+  }
+</style>

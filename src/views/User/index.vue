@@ -112,7 +112,7 @@
 </template>
 
 <script>
-import { getUserList, getRoleList, addOneUser, updateOneUser, deleteOneUser } from '../../plugins/api'
+import { getUserList, getRole, addOneUser, updateOneUser, deleteOneUser } from '../../plugins/api'
 export default {
   data () {
     return {
@@ -171,9 +171,9 @@ export default {
     }
   },
   mounted () {
-    getRoleList().then((data) => {
-      this.roleList = data.data.roles
-      this.roleObjs = this.array2Obj(data.data.roles, '_id')
+    getRole().then((data) => {
+      this.roleList = data.data.role
+      this.roleObjs = this.array2Obj(data.data.role, '_id')
       this.headers.splice(3, 0, { text: '角色', value: 'roles', sortable: false })
     })
   },

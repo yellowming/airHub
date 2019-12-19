@@ -5,16 +5,31 @@
       :items="apiList"
       :server-items-length="totalDesserts"
       :loading="loading"
+      hide-default-footer
     >
-      <template v-slot:item.public="{ item }">
-        <v-icon v-if="item.public" color="success">mdi-check</v-icon>
+    <template v-slot:top>
+        <v-toolbar flat>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="$router.push({name:'API_ADD'})">新增</v-btn>
+        </v-toolbar>
+      </template>
+      <template v-slot:item.title="{ item }">
+        <span v-if="item.category">{{item.category.title}}-</span>
+        {{item.title}}
+      </template>
+      <template v-slot:item.authentication="{ item }">
+        <v-icon v-if="item.authentication" color="success">mdi-check</v-icon>
         <v-icon v-else color="red">mdi-close</v-icon>
       </template>
-      <template v-slot:item.api="{ item }">
-        <v-chip v-for="api in item.api" :key="api.method" :color="methodColor[api.method]" dark small class="mx-1">{{api.method}}</v-chip>
+      <template v-slot:item.authorization="{ item }">
+        <v-icon v-if="item.authorization" color="success">mdi-check</v-icon>
+        <v-icon v-else color="red">mdi-close</v-icon>
+      </template>
+      <template v-slot:item.method="{ item }">
+        <v-chip :color="methodColor[item.method]" dark small class="mx-1">{{item.method}}</v-chip>
       </template>
       <template v-slot:item.action="{ item }">
-        <v-icon color="indigo" class="mr-2" > mdi-circle-edit-outline </v-icon>
+        <v-icon color="indigo" class="mr-2" @click="$router.push({name:'API_EDIT', params: { id: item._id }})"> mdi-circle-edit-outline </v-icon>
         <v-icon color="red" @click="deleteUser(item)">mdi-delete</v-icon>
       </template>
     </v-data-table>
@@ -22,17 +37,18 @@
 </template>
 
 <script>
-import { getApiList } from '@/plugins/api'
+import { getApi } from '@/plugins/api'
 export default {
   data: () => ({
     apiList: [],
     totalDesserts: 10,
     headers: [
+      { text: '标题', value: 'title', sortable: false },
       { text: '名称', value: 'name', sortable: false },
       { text: '路由', value: 'uri', sortable: false },
-      { text: 'methods', value: 'api', sortable: false },
-      { text: '分类', value: 'group_id', sortable: false },
-      { text: 'public', value: 'public', sortable: false },
+      { text: 'method', value: 'method', sortable: false },
+      { text: '需要认证', value: 'authentication', sortable: false },
+      { text: '需要授权', value: 'authorization', sortable: false },
       { text: '操作', value: 'action', sortable: false }
     ],
     loading: false,
@@ -45,7 +61,7 @@ export default {
     }
   }),
   mounted () {
-    getApiList().then(response => {
+    getApi().then(response => {
       this.apiList = response.data.apis
     })
   }

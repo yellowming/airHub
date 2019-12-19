@@ -4,7 +4,7 @@
       v-model="primaryDrawer.model"
       :clipped="primaryDrawer.clipped"
       floating
-      :mini-variant.sync="primaryDrawer.mini"
+      :mini-variant="primaryDrawer.mini"
       app
       overflow
     >
@@ -20,7 +20,7 @@
       app
       dark
     >
-      <v-app-bar-nav-icon  @click.stop="primaryDrawer.model = !primaryDrawer.model"/>
+      <v-app-bar-nav-icon  @click.stop="miniMenu ? (primaryDrawer.mini = !primaryDrawer.mini) : (primaryDrawer.model = !primaryDrawer.model)"/>
       <v-toolbar-title><router-link to="/"><v-img :src="logo" height="50" width="120" /></router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="handleFullScreen">
@@ -34,7 +34,7 @@
           color="orange"
         >
           <template v-slot:badge>
-            1
+            3
           </template>
           <v-icon>mdi-android-messages</v-icon>
         </v-badge>
@@ -87,9 +87,9 @@
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Enable hints</v-list-item-title>
+            <v-list-item-title>迷你菜单</v-list-item-title>
             <v-list-item-action>
-              <v-switch color="purple"></v-switch>
+              <v-switch v-model="miniMenu" @change="miniToogle" color="purple"></v-switch>
             </v-list-item-action>
           </v-list-item>
 
@@ -144,6 +144,7 @@ export default {
     homeRoute,
     logo,
     navUserMenu: false,
+    miniMenu: false,
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
     primaryDrawer: {
       model: null,
@@ -167,12 +168,17 @@ export default {
     },
     toProfile () {
       if (this.$route.name !== 'Profile') this.$router.push({ name: 'Profile' })
+      this.navUserMenu = false
     },
     darkToogle () {
       this.$store.commit('setDark', this.$vuetify.theme.isDark)
     },
+    miniToogle () {
+      if (this.miniMenu) {
+        if (!this.primaryDrawer.model) this.primaryDrawer.model = true
+      }
+    },
     getBreadcrumb () {
-      console.log(this)
       this.breadList = []
       if (!this.$route.name) return
       if (this.$route.name === homeRoute.name) return

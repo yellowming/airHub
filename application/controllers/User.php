@@ -5,7 +5,8 @@ class User extends Admin_Controller {
     function __construct(){
         parent::__construct();
     }
-	public function many_get(){
+    //查
+	public function index_get(){
         $params = $this->input->get();
         $where = [];
         $count = $this->adminUserModel->collection->count($where);
@@ -25,8 +26,8 @@ class User extends Admin_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode(['users'=>$users, 'params'=>$params, 'count'=>$count]));
     }
-
-    public function one_delete($_id){
+    //删除
+    public function index_delete(){
         $_id = $this->input->get('_id');
         $deleteResult = $this->adminUserModel->collection->deleteOne(['_id'=>new MongoDB\BSON\ObjectId($_id)]);
         if($deleteResult->getDeletedCount() === 1){
@@ -40,8 +41,8 @@ class User extends Admin_Controller {
             ->set_status_header(404);
         }
     }
-
-    public function one_post($_id){
+    //新增
+    public function index_post(){
         $params = json_decode($this->input->raw_input_stream, true);
         $this->load->library('form_validation');
         $this->form_validation->set_data($params);
@@ -84,7 +85,8 @@ class User extends Admin_Controller {
         }
         
     }
-    public function one_put($_id){
+    //修改
+    public function index_put(){
         $input = $this->input->get();
         if(!isset($input['_id'])) show_404();
         try {$ObjectId = new MongoDB\BSON\ObjectId($input['_id']); } catch (\Throwable $th)  {show_404();}
