@@ -27,8 +27,14 @@ router.beforeEach((to, from, next) => {
     return isLoginPage ? next() : next({ name: 'Login' })
   }
   if (!store.state.User) {
-    getProfile().then((re) => {
-      store.commit('setUser', re.data)
+    getProfile().then((response) => {
+      store.commit('setUser', response.data.user)
+      store.commit('setRoles', response.data.roles)
+      let AccessApis = {}
+      response.data.access.forEach((api) => {
+        AccessApis[api.name] = api
+      })
+      store.commit('setAccessApis', AccessApis)
       router.addRoutes(mainRoutes)
       next({ ...to, replace: true })
     }).catch((e) => {

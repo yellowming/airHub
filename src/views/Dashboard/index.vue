@@ -29,6 +29,7 @@
 
 <script>
 import AvatarCropper from '@/components/AvatarCropper'
+import { requestAccessApi } from '@/plugins/api'
 export default {
   components: { AvatarCropper },
   data () {
@@ -55,6 +56,9 @@ export default {
         _this.userAvatar = res.url
       })
     }
+  },
+  mounted () {
+    requestAccessApi('USER_LIST')
   }
 }
 </script>

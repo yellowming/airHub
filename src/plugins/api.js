@@ -1,4 +1,5 @@
 import axios from './axiosBase'
+import store from '@/store'
 
 const api = {
   profile: '/auth/profile',
@@ -13,6 +14,17 @@ const api = {
 }
 
 export default api
+
+export function requestAccessApi (name, options) {
+  const accessApis = store.state.AccessApis
+  if (accessApis[name]) {
+    let accessApi = accessApis[name]
+    options = options || {}
+    options.url = accessApi.uri
+    options.method = accessApi.method
+    return axios(options)
+  }
+}
 
 export function getProfile (parameter) {
   return axios({
@@ -92,6 +104,14 @@ export function addApi (parameter) {
   return axios({
     url: 'api/api',
     method: 'post',
+    data: parameter
+  })
+}
+
+export function editApi (parameter) {
+  return axios({
+    url: 'api/api',
+    method: 'put',
     data: parameter
   })
 }

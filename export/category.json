@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5df8473cbf8014b67b2bdd42"},"name":"API_GROUP","title":"API分组"}
+{"_id":{"$oid":"5df84812bf8014b67b2bdd90"},"parent_id":"5df8473cbf8014b67b2bdd42","title":"用户"}
+{"_id":{"$oid":"5df84877bf8014b67b2bddb9"},"parent_id":"5df8473cbf8014b67b2bdd42","title":"角色"}
+{"_id":{"$oid":"5df848a4bf8014b67b2bddc9"},"parent_id":"5df8473cbf8014b67b2bdd42","title":"视频"}
+{"_id":{"$oid":"5df848bfbf8014b67b2bddd1"},"parent_id":"5df8473cbf8014b67b2bdd42","title":"API"}

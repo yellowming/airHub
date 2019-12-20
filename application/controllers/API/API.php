@@ -23,13 +23,13 @@ class API extends Admin_Controller {
   }
 
   public function index_put(){
-    $input = $this->input->get();
+    $input = json_decode($this->input->raw_input_stream, true);
     if(!isset($input['_id'])) show_404();
     try {$ObjectId = new MongoDB\BSON\ObjectId($input['_id']); } catch (\Throwable $th)  {show_404();}
+    unset($input["_id"]);
     $api = $this->apiModel->collection->findOne(['_id'=>$ObjectId]);
     if(!$api) show_404();
     $api = MongoVal($api);
-    unset($api["_id"]);
     $this->load->library('form_validation');
     $this->form_validation->set_data($input);
     $this->form_validation->set_rules('name', '名称', ['trim','required','max_length[20]',['is_unique',function($name) use ($api){
@@ -38,16 +38,16 @@ class API extends Admin_Controller {
       return $api===null?true:false;
     }]]);
     $this->form_validation->set_rules('title', '标题', ['trim','required','max_length[20]']);
-    $this->form_validation->set_rules('uri', 'URI', ['trim','required','max_length[200]',['is_unique',function($uri) use ($api){
-      if($uri === $api['uri']) return true;
-      $api = $this->apiModel->collection->findOne(["uri"=>$uri]);
+    $this->form_validation->set_rules('uri', 'URI', ['trim','required','max_length[200]',['is_unique',function($uri) use ($api,$input){
+      if($uri === $api['uri'] && $input["method"] === $api["method"]) return true;
+      $api = $this->apiModel->collection->findOne(["uri"=>$uri,"method"=>$input["method"]]);
       return $api===null?true:false;
     }]]);
     $this->form_validation->set_rules('method', 'Method', ['required','in_list[get,post,delete,put,patch]']);
     if($this->form_validation->run()){
       $update = [];
       foreach($api as $key=>$filed){
-        if(isset($input[$key])) $update[$key] = $filed;
+        if(array_key_exists($key,$input)) $update[$key] = $input[$key];
       }
       $updateResult = $this->apiModel->collection->updateOne(['_id' => $ObjectId],[ '$set' => $update]);
       if($updateResult->getModifiedCount()===0 || $updateResult->getMatchedCount()===0){
@@ -75,8 +75,8 @@ class API extends Admin_Controller {
         return $api===null?true:false;
     }]]);
     $this->form_validation->set_rules('title', '标题', ['trim','required','max_length[20]']);
-    $this->form_validation->set_rules('uri', 'URI', ['trim','required','max_length[200]',['is_unique',function($uri){
-      $api = $this->apiModel->collection->findOne(["uri"=>$uri]);
+    $this->form_validation->set_rules('uri', 'URI', ['trim','required','max_length[200]',['is_unique',function($uri) use ($requestData){
+      $api = $this->apiModel->collection->findOne(["uri"=>$uri,"method"=>$requestData["method"]]);
       return $api===null?true:false;
     }]]);
     $this->form_validation->set_rules('method', 'Method', ['required','in_list[get,post,delete,put,patch]']);

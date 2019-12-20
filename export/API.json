@@ -1,0 +1,15 @@
+{"_id":{"$oid":"5de8cfc0155635e66e55cd7e"},"name":"USER_LIST","title":"列表","uri":"user","method":"get","authentication":true,"authorization":true,"category_id":"5df84812bf8014b67b2bdd90"}
+{"_id":{"$oid":"5df05d58155635e66e567ea9"},"name":"USER_DELETE","title":"删除","uri":"user","method":"delete","authentication":true,"authorization":true,"category_id":"5df84812bf8014b67b2bdd90"}
+{"_id":{"$oid":"5df05e2a155635e66e567ed0"},"name":"USER_EDIT","title":"修改","uri":"user","method":"put","authentication":true,"authorization":true,"category_id":"5df84812bf8014b67b2bdd90"}
+{"_id":{"$oid":"5df05eac155635e66e567ee9"},"name":"USER_ADD","title":"新增","uri":"user","method":"post","authentication":true,"authorization":true,"category_id":"5df84812bf8014b67b2bdd90"}
+{"_id":{"$oid":"5df08b34155635e66e568544"},"name":"VIDEO_LIST","title":"列表","uri":"video","method":"get","authentication":true,"authorization":true,"category_id":"5df848a4bf8014b67b2bddc9"}
+{"_id":{"$oid":"5df727ecbf8014b67b2b96d5"},"name":"AUTH_PROFILE","title":"账户信息","uri":"auth/profile","method":"get","authentication":true,"authorization":false,"category_id":null}
+{"_id":{"$oid":"5df73149bf8014b67b2b9854"},"name":"ROLE_LIST","title":"列表","uri":"role","method":"get","authentication":true,"authorization":true,"category_id":"5df84877bf8014b67b2bddb9"}
+{"_id":{"$oid":"5df7489abf8014b67b2b9d0d"},"name":"ROLE_UPDATE","title":"更新","uri":"role","method":"put","authentication":true,"authorization":true,"category_id":"5df84877bf8014b67b2bddb9"}
+{"_id":{"$oid":"5df74ca9bf8014b67b2b9e48"},"name":"API","title":"列表","uri":"api/api","method":"get","authentication":true,"authorization":true,"category_id":"5df848bfbf8014b67b2bddd1"}
+{"_id":{"$oid":"5df99d61bf8014b67b2c5dc3"},"name":"AUTH_TOKEN","title":"用户token","uri":"auth/login","method":"post","authentication":false,"authorization":false,"category_id":null}
+{"_id":{"$oid":"5df9d380bf8014b67b2c6283"},"name":"CATEGORY","title":"分类管理","uri":"api/category","method":"get","authentication":true,"authorization":true,"category_id":"5dcd0dd268799cc131499c8a"}
+{"_id":{"$oid":"5df9e667bf8014b67b2c64a3"},"name":"API_CATEGORY","title":"分组列表","uri":"api/api/category","method":"get","authentication":true,"authorization":true,"category_id":"5df848bfbf8014b67b2bddd1"}
+{"_id":{"$oid":"5dfad907bf8014b67b2c7f59"},"name":"API_ADD","title":"接口新增","uri":"api/api","method":"post","authentication":true,"authorization":true,"category_id":"5df848bfbf8014b67b2bddd1"}
+{"_id":{"$oid":"5dfb11f7a52b0000a2007ca2"},"name":"VIDEO_ADDS","title":"新增","method":"post","uri":"video","category_id":"5df848a4bf8014b67b2bddc9","authentication":true,"authorization":true}
+{"_id":{"$oid":"5dfc2a86706a0000c5005f94"},"name":"API_EDIT","title":"修改","uri":"api/api","method":"put","category_id":"5df848bfbf8014b67b2bddd1","authentication":true,"authorization":true}

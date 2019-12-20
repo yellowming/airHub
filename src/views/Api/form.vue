@@ -8,7 +8,7 @@
     <v-select v-model="apiData.category_id" :items="categories" item-text="title" item-value="_id" :loading="categoryLoading" label="分组" required></v-select>
     <v-checkbox v-model="apiData.authentication" label="Authentication 认证"></v-checkbox>
     <v-checkbox v-model="apiData.authorization" label="Authorization 授权"></v-checkbox>
-    <v-btn class="mr-5">取消并返回</v-btn>
+    <v-btn class="mr-5" @click="$router.go(-1)">取消并返回</v-btn>
     <v-btn color="primary" @click="validate"> 提交 </v-btn>
   </v-form>
   <v-dialog v-model="loading" persistent width="300">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getApi, getApiGroup, addApi } from '@/plugins/api'
+import { getApi, getApiGroup, addApi, editApi } from '@/plugins/api'
 export default {
   data: () => ({
     apiData: {
@@ -53,7 +53,7 @@ export default {
     methods: ['get', 'post', 'put', 'delete', 'patch'],
     categories: [{ _id: null, title: '不分组' }],
     categoryLoading: false,
-    loading: true
+    loading: false
   }),
   mounted () {
     this.categoryLoading = true
@@ -75,9 +75,17 @@ export default {
       this.$refs.form.resetValidation()
       if (this.$refs.form.validate()) {
         console.log(this.apiData)
-        addApi(this.apiData).then(res => {
-          console.log(res.data)
-        })
+        if (this.apiData._id) {
+          editApi(this.apiData).then(res => {
+            console.log(res.data)
+            this.$router.go(-1)
+          })
+        } else {
+          addApi(this.apiData).then(res => {
+            console.log(res.data)
+            this.$router.go(-1)
+          })
+        }
       }
     }
   }

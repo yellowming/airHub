@@ -8,11 +8,7 @@
       app
       overflow
     >
-      <v-list nav dense>
-        <template v-for="menuItem in menuRoutes">
-          <menu-item v-if="menuItem.meta && !menuItem.meta.hideMenu" :key="menuItem.name" :itemData="menuItem"/>
-        </template>
-      </v-list>
+      <side-menu />
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="primaryDrawer.clipped"
@@ -50,10 +46,10 @@
       <template v-slot:activator="{ on }">
         <v-btn text v-on="on">
           <v-avatar color="primary" size="36">
-            <img v-if="$store.state.User.user.avatar" :src="$store.state.User.user.avatar">
-            <span v-else class="white--text text-uppercase">{{ $store.state.User.user.name.substr(0, 1) }}</span>
+            <img v-if="$store.state.User.avatar" :src="$store.state.User.avatar">
+            <span v-else class="white--text text-uppercase">{{ $store.state.User.name.substr(0, 1) }}</span>
           </v-avatar>
-          <span class="mx-1 text-capitalize">{{$store.state.User.user.name}}</span>
+          <span class="mx-1 text-capitalize">{{$store.state.User.name}}</span>
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
       </template>
@@ -62,13 +58,13 @@
         <v-list>
           <v-list-item>
             <v-list-item-avatar size="48">
-              <img v-if="$store.state.User.user.avatar" :src="$store.state.User.user.avatar" :alt="$store.state.User.user.name">
-              <span v-else class="white--text text-uppercase">{{ $store.state.User.user.name.substr(0, 1) }}</span>
+              <img v-if="$store.state.User.avatar" :src="$store.state.User.avatar" :alt="$store.state.User.name">
+              <span v-else class="white--text text-uppercase">{{ $store.state.User.name.substr(0, 1) }}</span>
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title>{{$store.state.User.user.name}}</v-list-item-title>
-              <v-list-item-subtitle>{{$store.state.User.user.email}}</v-list-item-subtitle>
+              <v-list-item-title>{{$store.state.User.name}}</v-list-item-title>
+              <v-list-item-subtitle>{{$store.state.User.email}}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
                 <v-btn icon @click="toProfile">
@@ -133,12 +129,12 @@
 </template>
 
 <script>
-import MenuItem from '@/components/MenuItem'
-import menuRoutes, { homeRoute } from '@/router/menuRouters'
+import SideMenu from '@/components/SideMenu'
+import { homeRoute } from '@/router/menuRouters'
 import logo from '@/assets/logo.png'
 export default {
   components: {
-    MenuItem
+    SideMenu
   },
   data: () => ({
     homeRoute,
@@ -152,7 +148,6 @@ export default {
       clipped: true,
       mini: false
     },
-    menuRoutes,
     breadList: [],
     fullscreen: false,
     states: [

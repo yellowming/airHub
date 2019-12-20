@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     UserToken: localStorage.getItem('user_token'),
     User: null,
+    Roles: [],
+    AccessApis: {},
     isDark: localStorage.getItem('isDark') === 'true'
   },
   mutations: {
@@ -18,6 +20,12 @@ export default new Vuex.Store({
     setUser (state, user) {
       state.User = user
     },
+    setRoles (state, Roles) {
+      state.Roles = Roles
+    },
+    setAccessApis (state, AccessApis) {
+      state.AccessApis = AccessApis
+    },
     setDark (state, isDark) {
       localStorage.setItem('isDark', isDark)
       state.isDark = isDark
@@ -27,7 +35,13 @@ export default new Vuex.Store({
     async getUser ({ commit }) {
       axios.get('auth/user')
         .then(response => {
-          commit('setUser', response.data)
+          commit('setUser', response.data.user)
+          commit('setRoles', response.data.roles)
+          let AccessApis = {}
+          for (let api in response.data.access) {
+            AccessApis[api.name] = api
+          }
+          commit('setAccessApis', AccessApis)
         })
         .catch((error) => {
           console.log(error)
