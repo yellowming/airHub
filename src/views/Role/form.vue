@@ -78,7 +78,9 @@ export default {
       this.$refs.form.resetValidation()
       if (this.$refs.form.validate()) {
         updateRole(this.role).then(res => {
-          this.$router.go(-1)
+          history.go(-1)
+          // this.$router.go(-1)
+          // location.reload()
         })
       }
     }

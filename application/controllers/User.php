@@ -8,6 +8,8 @@ class User extends Admin_Controller {
     //查
 	public function index_get(){
         $params = $this->input->get();
+        $params['itemsPerPage'] = isset($params['itemsPerPage']) ? (int)$params['itemsPerPage'] : 20;
+        $params['page'] = isset($params['page']) ? (int)$params['page'] : 1;
         $where = [];
         $count = $this->adminUserModel->collection->count($where);
         $users = $this->adminUserModel->collection->find($where,[
@@ -19,7 +21,7 @@ class User extends Admin_Controller {
             ],
             'limit' => (int)$params['itemsPerPage'],
             'skip' => ((int)$params['page']-1)*(int)$params['itemsPerPage'],
-            'sort' => [$params['mustSort'] => -1]
+            'sort' => []
         ]);
         $users = $users ? MongoVal($users) : [];
         $this->output

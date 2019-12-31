@@ -1,0 +1,10 @@
+<template>
+    <v-alert
+      text
+      prominent
+      type="error"
+      icon="mdi-cloud-alert"
+    >
+      403:没有权限
+    </v-alert>
+</template>

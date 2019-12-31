@@ -1,5 +1,7 @@
 function view (file) {
-  return (resovle) => import(`../views/${file}.vue`).then(resovle)
+  return (resovle) => {
+    import(`@/views/${file}.vue`).then(resovle)
+  }
 }
 
 export const homeRoute = {
@@ -58,10 +60,7 @@ const menuRoutes = [
           {
             path: '',
             component: view('Role/index'),
-            name: 'Role-list',
-            meta: {
-              title: '列表'
-            }
+            name: 'Role-list'
           }
         ]
       },
@@ -78,12 +77,27 @@ const menuRoutes = [
   },
   {
     path: '/user',
-    component: view('User/index'),
-    name: 'User',
+    component: view('Router'),
     meta: {
       title: '用户',
-      icon: 'mdi-account-supervisor'
-    }
+      icon: 'mdi-account-supervisor',
+      hideChildren: true
+    },
+    children: [
+      {
+        path: '',
+        component: view('User/index'),
+        name: 'USER_LIST'
+      },
+      {
+        path: 'add',
+        component: view('User/form'),
+        name: 'USER_ADD',
+        meta: {
+          title: '新增'
+        }
+      }
+    ]
   },
   {
     path: '/videos',
@@ -91,8 +105,20 @@ const menuRoutes = [
     name: 'VideoList',
     meta: {
       title: '视频列表',
-      icon: 'mdi-library-video'
-    }
+      icon: 'mdi-library-video',
+      permissions: 'VIDEO_LIST',
+      hideChildren: true
+    },
+    children: [
+      {
+        path: 'add',
+        component: view('Video/form'),
+        name: 'VIDEO_ADD',
+        meta: {
+          title: '新增'
+        }
+      }
+    ]
   },
   {
     path: '/apis',

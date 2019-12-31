@@ -122,7 +122,8 @@
         </template>
       </v-breadcrumbs>
       <v-container fluid>
-        <router-view></router-view>
+        <router-view v-if="hasPermission"></router-view>
+        <deny-page v-else />
       </v-container>
     </v-content>
   </v-app>
@@ -132,13 +133,16 @@
 import SideMenu from '@/components/SideMenu'
 import { homeRoute } from '@/router/menuRouters'
 import logo from '@/assets/logo.png'
+import denyPage from '@/views/403'
 export default {
   components: {
-    SideMenu
+    SideMenu,
+    denyPage
   },
   data: () => ({
     homeRoute,
     logo,
+    hasPermission: true,
     navUserMenu: false,
     miniMenu: false,
     drawers: ['Default (no property)', 'Permanent', 'Temporary'],
@@ -174,6 +178,7 @@ export default {
       }
     },
     getBreadcrumb () {
+      this.hasPermission = this.helper.hasPermissions(this.$route.meta.permissions)
       this.breadList = []
       if (!this.$route.name) return
       if (this.$route.name === homeRoute.name) return

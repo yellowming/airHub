@@ -7,7 +7,7 @@
       <menu-item v-if="item.meta && !item.meta.hideMenu" :key="item.name" :itemData="item" subGroup/>
     </template>
   </v-list-group>
-  <v-list-item v-else link :to="itemData">
+  <v-list-item v-else-if="helper.hasPermissions(itemData.meta.permissions)" link :to="itemData">
     <v-list-item-icon>
       <v-icon v-text="itemData.meta.icon"></v-icon>
     </v-list-item-icon>

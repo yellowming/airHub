@@ -2238,3 +2238,50 @@ DEBUG - 2019-12-20 09:13:45 --> Global POST, GET and COOKIE data sanitized
 DEBUG - 2019-12-20 09:13:45 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
 DEBUG - 2019-12-20 09:13:45 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
 DEBUG - 2019-12-20 09:13:45 --> Total execution time: 0.0370
+DEBUG - 2019-12-20 10:01:09 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:09 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:09 --> Total execution time: 0.0240
+DEBUG - 2019-12-20 10:01:09 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:09 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:10 --> Total execution time: 0.5430
+DEBUG - 2019-12-20 10:01:11 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:11 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:11 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:11 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:11 --> Total execution time: 0.0270
+DEBUG - 2019-12-20 10:01:11 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:11 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:11 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:11 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:11 --> Total execution time: 0.0270
+DEBUG - 2019-12-20 10:01:19 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:19 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:19 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:19 --> Total execution time: 0.0210
+DEBUG - 2019-12-20 10:01:19 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:19 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:19 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:19 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:19 --> Total execution time: 0.0290
+DEBUG - 2019-12-20 10:01:20 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:20 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:20 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:20 --> Total execution time: 0.0240
+DEBUG - 2019-12-20 10:01:20 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:01:20 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:01:20 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:01:20 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:01:20 --> Total execution time: 0.0270
+DEBUG - 2019-12-20 10:03:31 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:03:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:03:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:03:31 --> Total execution time: 0.0230
+DEBUG - 2019-12-20 10:03:31 --> UTF-8 Support Enabled
+DEBUG - 2019-12-20 10:03:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2019-12-20 10:03:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2019-12-20 10:03:31 --> Config file loaded: D:\laragon\www\airHub\application\config/mongo.php
+DEBUG - 2019-12-20 10:03:31 --> Total execution time: 0.0280

@@ -5,8 +5,11 @@ import vuetify from './plugins/vuetify'
 
 import router from './router'
 import store from './store'
+import helper from '@/plugins/helper'
 
+Vue.prototype.helper = helper
 Vue.config.productionTip = false
+
 new Vue({
   vuetify,
   axios,
