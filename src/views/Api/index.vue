@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { getApi } from '@/plugins/api'
 export default {
   data: () => ({
     apiList: [],
@@ -61,7 +60,7 @@ export default {
     }
   }),
   mounted () {
-    getApi().then(response => {
+    this.helper.permissionRequest('API').then(response => {
       this.apiList = response.data.apis
     })
   }

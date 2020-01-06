@@ -70,7 +70,7 @@ export default {
         img: '', // 裁剪图片的地址
         info: true, // 裁剪框的大小信息
         outputSize: 0.8, // 裁剪生成图片的质量
-        outputType: 'png', // 裁剪生成图片的格式
+        outputType: 'jpeg', // 裁剪生成图片的格式
         canScale: true, // 图片是否允许滚轮缩放
         autoCrop: true, // 是否默认生成截图框
         fixedBox: true, // 固定截图框大小 不允许改变
@@ -115,14 +115,14 @@ export default {
         let img = window.URL.createObjectURL(data)
         this.model = true
         this.modelSrc = img
-        formData.append('file', data, this.fileName)
+        formData.append('avatar', data, this.fileName)
         this.$emit('submit', formData)
         this.destroy()
       })
     },
     uploadImg (e, num) {
-      this.fileName = e.target.files[0].name
-      if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
+      this.fileName = 'avatar.jpg'
+      if (!/\.(jpg|jpeg|png|JPG|JPEG|PNG)$/.test(e.target.value)) {
         alert('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
         return false
       }

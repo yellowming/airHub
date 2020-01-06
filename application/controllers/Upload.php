@@ -20,9 +20,9 @@ class Upload extends Admin_Controller {
     }else{
       $data = $this->upload->data();
       $data['url'] = base_url('/storage/'.$data['file_name']);
-        $this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode($data));
+      $this->output
+      ->set_content_type('application/json')
+      ->set_output(json_encode($data));
     }
 	}
 	

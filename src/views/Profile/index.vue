@@ -95,11 +95,8 @@ export default {
       this.$refs.avatarPicker.pickImg()
     },
     avatarUpload (formData) {
-      let _this = this
-      this.$axios.post('upload', formData, { contentType: false, processData: false, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((response) => {
-        var res = response.data
-        _this.$store.state.User.user.avatar = res.url
-        _this.userAvatar = res.url
+      this.$axios.post('api/upload/avatar', formData, { contentType: false, processData: false, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((response) => {
+        this.$store.state.User.avatar = response.data.url
       })
     }
   }

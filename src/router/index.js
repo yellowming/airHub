@@ -30,11 +30,7 @@ router.beforeEach((to, from, next) => {
     getProfile().then((response) => {
       store.commit('setUser', response.data.user)
       store.commit('setRoles', response.data.roles)
-      let AccessApis = {}
-      response.data.access.forEach((api) => {
-        AccessApis[api.name] = api
-      })
-      store.commit('setAccessApis', AccessApis)
+      store.commit('setAccessApis', response.data.access)
       router.addRoutes(mainRoutes)
       next({ ...to, replace: true })
     }).catch((e) => {

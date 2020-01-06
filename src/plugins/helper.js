@@ -1,4 +1,5 @@
 import store from '@/store'
+import axios from './axiosBase'
 export default {
   // 是否有权限
   hasPermissions: (permissions) => {
@@ -16,7 +17,11 @@ export default {
     let AccessApis = store.state.AccessApis
     return permissionArr.some(v => AccessApis[v])
   },
-  permissionRequest: (permission) => {
-    let api = 
+  permissionRequest: (permission, options) => {
+    let api = store.state.AccessApis[permission]
+    options = options || {}
+    options.url = api.uri
+    options.method = api.method
+    return axios(options)
   }
 }

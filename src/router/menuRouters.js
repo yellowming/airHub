@@ -96,6 +96,14 @@ const menuRoutes = [
         meta: {
           title: '新增'
         }
+      },
+      {
+        path: 'edit/:id',
+        component: view('User/form'),
+        name: 'USER_EDIT',
+        meta: {
+          title: '修改'
+        }
       }
     ]
   },

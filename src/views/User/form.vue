@@ -3,7 +3,7 @@
     <input type="hidden" v-model="formData._id"/>
     <v-text-field label="用户名" :rules="rules.name" v-model="formData.name"></v-text-field>
     <v-text-field label="邮箱" :rules="rules.email" type="email" v-model="formData.email"></v-text-field>
-    <v-text-field label="密码" :rules="rules.password" type="password" autocomplete="new-password" v-model="formData.password" persistent-hint></v-text-field>
+    <v-text-field label="密码" :rules="rules.password" type="password" autocomplete="new-password" v-model="formData.password"></v-text-field>
     <v-select
       v-model="formData.roles"
       :rules="rules.roles"
@@ -25,8 +25,8 @@ export default {
     valid: true,
     formData: {
       _id: '',
-      name: '  ',
-      email: ' ',
+      name: '',
+      email: '',
       password: '',
       roles: []
     },

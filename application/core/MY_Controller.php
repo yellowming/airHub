@@ -30,7 +30,7 @@ class Admin_Controller extends MY_Controller
         if (!method_exists($this, $jwtMethod)){
             return $this->output
                 ->set_content_type('application/json')
-                ->set_output(json_encode(['message'=>'NotFound']))
+                ->set_output(json_encode(['message'=>'NotFound,undefined {$method}_{$input_method}']))
                 ->set_status_header(404);
         }
         $this->load->model(['apiModel','adminUserModel','adminRoleModel', 'categoryModel']);
@@ -67,12 +67,14 @@ class Admin_Controller extends MY_Controller
         foreach($roles as $role){
             $accessApis = array_unique(array_merge($accessApis, $role['apis']));
         }
-        $accessApisRes = [];
+        $accessApisIds = [];
         foreach($accessApis as $uriID){
-            $accessApisRes[] = new MongoDB\BSON\ObjectId($uriID);
+            $accessApisIds[] = new MongoDB\BSON\ObjectId($uriID);
         }
-        $apiCursor = $this->apiModel->collection->find(['_id'=>['$in'=>$accessApisRes]]);
-        $this->permissionApis = MongoVal($apiCursor);
+        $apiCursor = $this->apiModel->collection->find(['_id'=>['$in'=>$accessApisIds]]);
+        $permissions = [];
+        foreach($apiCursor as $api) $permissions[$api['name']] = MongoVal($api);
+        $this->permissionApis = $permissions;
     }
 
     private function authVerify(){
