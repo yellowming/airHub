@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import menuRoutes from './menuRouters'
-import { getProfile } from '@/plugins/api'
+import api from '@/plugins/api'
 
 Vue.use(VueRouter)
 
@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
     return isLoginPage ? next() : next({ name: 'Login' })
   }
   if (!store.state.User) {
-    getProfile().then((response) => {
+    api.getProfile().then((response) => {
       store.commit('setUser', response.data.user)
       store.commit('setRoles', response.data.roles)
       store.commit('setAccessApis', response.data.access)

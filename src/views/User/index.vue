@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import { getUserList, getRole } from '@/plugins/api'
 export default {
   data () {
     return {
@@ -96,16 +95,18 @@ export default {
     if (this.helper.containPermissions(['USER_DELETE', 'USER_EDIT'])) {
       this.headers.push({ text: '操作', value: 'action', sortable: false })
     }
-    getRole().then((data) => {
-      this.roleList = data.data.role
-      this.roleObjs = this.array2Obj(data.data.role, '_id')
-      this.headers.splice(3, 0, { text: '角色', value: 'roles', sortable: false })
-    })
+    if (this.helper.hasPermissions('ROLE_LIST')) {
+      this.helper.permissionRequest('ROLE_LIST').then((data) => {
+        this.roleList = data.data.role
+        this.roleObjs = this.array2Obj(data.data.role, '_id')
+        this.headers.splice(3, 0, { text: '角色', value: 'roles', sortable: false })
+      })
+    }
   },
   methods: {
     getData () {
       this.loading = true
-      getUserList(this.options).then((data) => {
+      this.helper.permissionRequest('USER_LIST', { params: this.options }).then((data) => {
         this.userList = data.data.users
         this.totalDesserts = data.data.count
         this.loading = false

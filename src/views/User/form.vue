@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { getRole } from '@/plugins/api'
 export default {
   data: () => ({
     valid: true,
@@ -48,8 +47,8 @@ export default {
     }
   }),
   mounted () {
-    getRole().then((data) => {
-      this.roleList = data.data.role
+    this.helper.permissionRequest('ROLE_LIST').then(res => {
+      this.roleList = res.data.role
     })
   }
 }

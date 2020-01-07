@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { getApi, getApiGroup, addApi, editApi } from '@/plugins/api'
 export default {
   data: () => ({
     apiData: {
@@ -57,16 +56,17 @@ export default {
   }),
   mounted () {
     this.categoryLoading = true
-    getApiGroup().then(res => {
+    this.helper.permissionRequest('CATEGORY').then(res => {
       this.categoryLoading = false
       this.categories = this.categories.concat(res.data.categories)
     })
+
     if (this.$route.name === 'API_EDIT') {
       this.loading = true
-      getApi({ _id: this.$route.params.id }).then(res => {
+      let params = { _id: this.$route.params.id }
+      this.helper.permissionRequest('API_LIST', { params }).then(res => {
         this.loading = false
         this.apiData = res.data.apis[0]
-        console.log(res.data)
       })
     }
   },
@@ -74,15 +74,12 @@ export default {
     validate () {
       this.$refs.form.resetValidation()
       if (this.$refs.form.validate()) {
-        console.log(this.apiData)
         if (this.apiData._id) {
-          editApi(this.apiData).then(res => {
-            console.log(res.data)
+          this.helper.permissionRequest('API_EDIT', { data: this.apiData }).then(res => {
             this.$router.go(-1)
           })
         } else {
-          addApi(this.apiData).then(res => {
-            console.log(res.data)
+          this.helper.permissionRequest('API_ADD', { data: this.apiData }).then(res => {
             this.$router.go(-1)
           })
         }

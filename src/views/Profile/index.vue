@@ -84,6 +84,7 @@
 
 <script>
 import AvatarCropper from '@/components/AvatarCropper'
+import api from '@/plugins/api'
 export default {
   components: { AvatarCropper },
   data: () => ({
@@ -95,8 +96,9 @@ export default {
       this.$refs.avatarPicker.pickImg()
     },
     avatarUpload (formData) {
-      this.$axios.post('api/upload/avatar', formData, { contentType: false, processData: false, headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then((response) => {
-        this.$store.state.User.avatar = response.data.url
+      console.log(formData)
+      api.editProfile(formData).then(res => {
+        console.log(res)
       })
     }
   }

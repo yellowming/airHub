@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import api from '@/plugins/api'
 export default {
   data: () => ({
     valid: true,
@@ -115,14 +116,12 @@ export default {
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
-        let _this = this
-        this.axios.post('auth/login', {
+        api.login({
           email: this.email,
           password: this.password
-        }).then(function (response) {
-          _this.$axios.defaults.headers.common['Authorization'] = response.data.token
-          _this.$store.commit('setUserToken', response.data.token)
-          _this.$router.push({ path: '/' }).then(() => {}).catch(() => {})
+        }).then((response) => {
+          this.$store.commit('setUserToken', response.data.token)
+          this.$router.push({ path: '/' }).then(() => {}).catch(() => {})
         }).catch((error) => {
           console.log(error)
         })

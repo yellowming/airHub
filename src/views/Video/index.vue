@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { getVideoList } from '@/plugins/api'
 import moment from 'moment'
 moment.locale('zh-cn')
 
@@ -86,7 +85,7 @@ export default {
     },
     getData () {
       this.tableLoading = true
-      getVideoList(this.options).then(res => {
+      this.helper.permissionRequest('VIDEO_LIST', { params: this.options }).then(res => {
         this.tableLoading = false
         this.totalDesserts = res.data.count
         this.videos = res.data.videos

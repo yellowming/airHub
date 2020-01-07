@@ -38,10 +38,11 @@
 </template>
 
 <script>
-import { getRole, updateRole } from '@/plugins/api'
+import helper from '@/plugins/helper'
 export default {
   beforeRouteEnter (to, from, next) {
-    getRole({ _id: to.params.id, withAuthApis: true }).then(res => {
+    let params = { _id: to.params.id, withAuthApis: true }
+    helper.permissionRequest('ROLE_LIST', { params }).then(res => {
       let role = res.data.role[0]
       let authApis = res.data.authApis
       next(vm => {
@@ -77,10 +78,8 @@ export default {
     validate () {
       this.$refs.form.resetValidation()
       if (this.$refs.form.validate()) {
-        updateRole(this.role).then(res => {
+        this.helper.permissionRequest('ROLE_EDIT', { data: this.role }).then(res => {
           history.go(-1)
-          // this.$router.go(-1)
-          // location.reload()
         })
       }
     }

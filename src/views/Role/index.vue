@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { getRole } from '@/plugins/api'
 export default {
   data: () => ({
     roleList: [],
@@ -34,9 +33,9 @@ export default {
   methods: {
     getRoleList () {
       this.loading = true
-      getRole().then(response => {
+      this.helper.permissionRequest('ROLE_LIST').then(res => {
         this.loading = false
-        this.roleList = response.data.role
+        this.roleList = res.data.role
       })
     },
     roleEdit (_id) {

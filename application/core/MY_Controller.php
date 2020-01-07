@@ -81,7 +81,7 @@ class Admin_Controller extends MY_Controller
         $apis = $this->apiModel->collection->find();
         $apis = $apis ? MongoVal($apis) : [];
         foreach($apis as $api){
-            if($this->input->method() === $api["method"] && $this->uri->uri_string === $api["uri"]){
+            if($this->input->method() === $api["method"] && $this->uri->uri_string === 'api'.$api["uri"]){
                 if(!$api["authentication"]) return true; //如果接口不需要认证
                 if(!$this->jwt->verify($this->input->get_request_header('Authorization', TRUE))){ //认证
                     $this->output

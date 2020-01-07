@@ -60,7 +60,7 @@ export default {
     }
   }),
   mounted () {
-    this.helper.permissionRequest('API').then(response => {
+    this.helper.permissionRequest('API_LIST').then(response => {
       this.apiList = response.data.apis
     })
   }

@@ -116,6 +116,7 @@ export default {
         this.model = true
         this.modelSrc = img
         formData.append('avatar', data, this.fileName)
+        console.log(formData)
         this.$emit('submit', formData)
         this.destroy()
       })
